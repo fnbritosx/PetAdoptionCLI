@@ -5,6 +5,6 @@ public class TerminalExceptionCharacter extends RuntimeException {
         super(message);
     }
     public TerminalExceptionCharacter() {
-        super("Você digitou um caractere em vez de um número. Digite um número válido por favor.");
+        super("Entrada inválida: foi digitado um caractere em vez de um número. Por favor, insira um número válido.");
     }
 }

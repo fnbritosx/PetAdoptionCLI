@@ -5,6 +5,6 @@ public class TerminalNullException extends RuntimeException {
     super(message);
   }
   public TerminalNullException() {
-    super("Você não digitou nada. Por favor, digite um número válido: ");
+    super("Entrada inválida: nenhum valor foi digitado. Por favor, insira um número válido:");
   }
 }

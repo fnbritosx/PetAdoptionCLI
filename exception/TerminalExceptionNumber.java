@@ -5,6 +5,6 @@ public class TerminalExceptionNumber extends RuntimeException {
         super(message);
     }
     public TerminalExceptionNumber(){
-        super("Você digitou um número inválido.");
+        super("Entrada inválida: o número digitado não é válido. Tente novamente.");
     }
 }
