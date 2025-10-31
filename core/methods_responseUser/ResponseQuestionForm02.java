@@ -2,20 +2,20 @@ package core.methods_responseUser;
 
 import exception.NamePetExcepetion;
 import pet.Pet;
-import pet.SexPet;
+import pet.TypePet;
 
 import java.util.Scanner;
 
-public class ResponseQuestionThree {
-    public static void responseQuestionThree() {
+public class ResponseQuestionForm02 {
+    public static void responseQuestionForm02() {
         System.out.print("R: ");
-        SexPet sexPet = null;
+        TypePet typePet = null;
 
         Scanner scanner = new Scanner(System.in);
         String responseRegistrationPet = scanner.nextLine().toUpperCase().trim();
 
         try {
-            sexPet = SexPet.valueOf(responseRegistrationPet);
+            typePet = TypePet.valueOf(responseRegistrationPet);
         } catch (NamePetExcepetion e) {
             throw new NamePetExcepetion();
         }

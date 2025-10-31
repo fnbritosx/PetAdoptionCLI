@@ -1,6 +1,7 @@
 package core.methods_responseUser;
 
 
+import exception.TerminalExceptionCharacter;
 import pet.Pet;
 
 import java.io.BufferedReader;
@@ -19,15 +20,23 @@ public class RegistrationPet {
                 System.out.println(line);
 
                 if (line.startsWith("1")) {
-                    ResponseQuestionOne.responseQuestionOne();
+                    ResponseQuestionForm01.responseQuestionForm01();
                 }
 
                 if (line.startsWith("2")) {
-                    ResponseQuestionTwo.responseQuestionTwo();
+                    ResponseQuestionForm02.responseQuestionForm02();
                 }
 
                 if (line.startsWith("3")) {
-                    ResponseQuestionThree.responseQuestionThree();
+                    ResponseQuestionForm03.responseQuestionForm03();
+                }
+
+                if (line.startsWith("4")) {
+                    ResponseQuestionForm04.responseQuestionForm04();
+                }
+
+                if (line.startsWith("5")){
+
                 }
             }
 

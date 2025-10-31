@@ -5,8 +5,8 @@ import pet.Pet;
 
 import java.util.Scanner;
 
-public class ResponseQuestionOne {
-    public static void responseQuestionOne() {
+public class ResponseQuestionForm01 {
+    public static void responseQuestionForm01() {
         System.out.print("R: ");
         Scanner scanner = new Scanner(System.in);
         String responseRegistrationPet = scanner.nextLine();
