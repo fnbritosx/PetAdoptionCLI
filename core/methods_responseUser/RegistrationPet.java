@@ -1,7 +1,5 @@
 package core.methods_responseUser;
 
-
-import exception.TerminalExceptionCharacter;
 import pet.Pet;
 
 import java.io.BufferedReader;

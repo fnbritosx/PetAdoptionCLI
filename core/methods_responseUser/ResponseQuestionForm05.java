@@ -1,6 +1,5 @@
 package core.methods_responseUser;
 
-import exception.TerminalExceptionCharacter;
 import exception.TerminalExceptionNumber;
 import pet.Pet;
 
