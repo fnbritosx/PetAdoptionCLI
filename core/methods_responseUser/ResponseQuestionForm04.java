@@ -4,41 +4,68 @@ import exception.TerminalExceptionCharacter;
 import pet.Pet;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class ResponseQuestionForm04 {
+    public static void main(String[] args) {
+        responseQuestionForm04();
+    }
+
     public static void responseQuestionForm04() {
-        System.out.print("i. Número da casa: ");
         Scanner scanner = new Scanner(System.in);
-        String responseRegistrationPet = scanner.nextLine();
 
-        for (int i = 0; i < responseRegistrationPet.length(); i++) {
-            if (!Character.isDigit(responseRegistrationPet.charAt(i))) {
-                throw new TerminalExceptionCharacter();
+        String numeroCasa = "";
+        while (true) {
+            try {
+                System.out.print("i. Número da casa: ");
+                numeroCasa = scanner.nextLine().trim();
+
+                String regexNumeroCasa = "^[0-9]{1,5}$";
+                if (!Pattern.matches(regexNumeroCasa, numeroCasa)) {
+                    throw new TerminalExceptionCharacter("Entrada inválida: digite um número de até 5 dígitos.");
+                }
+
+                Pet.responseUserForm(numeroCasa);
+                break;
+            } catch (TerminalExceptionCharacter e) {
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
-        Pet.responseUserForm(responseRegistrationPet);
 
-        System.out.print("ii. Cidade: ");
-        responseRegistrationPet = scanner.nextLine();
+        String cidade = "";
+        while (true) {
+            try {
+                System.out.print("ii. Cidade: ");
+                cidade = scanner.nextLine().trim();
 
-        for (int i = 0; i < responseRegistrationPet.length(); i++) {
-            if (!Character.isLetter(responseRegistrationPet.charAt(i)) &&
-                    (!responseRegistrationPet.contains(" "))) {
-                throw new TerminalExceptionCharacter("Entrada inválida: você não digitou um caractere válido.");
+                String regexCidade = "^[A-Za-zÀ-ú ]{1,40}$";
+                if (!Pattern.matches(regexCidade, cidade)) {
+                    throw new TerminalExceptionCharacter("Entrada inválida: você não digitou um caractere válido.");
+                }
+
+                Pet.responseUserForm(cidade);
+                break;
+            } catch (TerminalExceptionCharacter e) {
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
-        Pet.responseUserForm(responseRegistrationPet);
 
-        System.out.print("iii. Rua: ");
-        responseRegistrationPet = scanner.nextLine();
+        String rua = "";
+        while (true) {
+            try {
+                System.out.print("iii. Rua: ");
+                rua = scanner.nextLine().trim();
 
-        for (int i = 0; i < responseRegistrationPet.length(); i++) {
-            if (!Character.isLetterOrDigit(responseRegistrationPet.charAt(i)) &&
-                    (!responseRegistrationPet.contains(" "))) {
-                throw new TerminalExceptionCharacter("Entrada inválida: você não digitou um caractere válido. haha");
+                String regexRua = "^[A-Za-zÀ-ú ]{1,47}[0-9]{0,3}$";
+                if (!Pattern.matches(regexRua, rua)) {
+                    throw new TerminalExceptionCharacter("Entrada inválida: você não digitou um caractere válido.");
+                }
+
+                Pet.responseUserForm(rua);
+                break;
+            } catch (TerminalExceptionCharacter e) {
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
-        Pet.responseUserForm(responseRegistrationPet);
     }
 }
-

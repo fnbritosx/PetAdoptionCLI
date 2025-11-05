@@ -36,7 +36,7 @@ public class RegistrationPet {
                 }
 
                 if (line.startsWith("5")){
-
+                    ResponseQuestionForm05.responseQuestionForm05();
                 }
             }
 
