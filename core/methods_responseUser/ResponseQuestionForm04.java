@@ -25,6 +25,10 @@ public class ResponseQuestionForm04 {
                     throw new TerminalExceptionCharacter("Entrada inválida: digite um número de até 5 dígitos.");
                 }
 
+                if (numeroCasa.trim().isEmpty()){
+                    numeroCasa = Pet.NAO_INFORMADO;
+                }
+
                 Pet.responseUserForm(numeroCasa);
                 break;
             } catch (TerminalExceptionCharacter e) {

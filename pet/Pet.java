@@ -12,4 +12,6 @@ public class Pet {
     public static ArrayList<String> getResponseUserForm() {
         return responseUserForm;
     }
+
+    public static final String NAO_INFORMADO = "NÃO INFORMADO";
 }

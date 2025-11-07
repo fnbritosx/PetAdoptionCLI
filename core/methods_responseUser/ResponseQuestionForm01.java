@@ -18,6 +18,11 @@ public class ResponseQuestionForm01 {
                         throw new NamePetExcepetion();
                     }
                 }
+
+                if (responseRegistrationPet.trim().isEmpty()){
+                    responseRegistrationPet = Pet.NAO_INFORMADO;
+                }
+
                 Pet.responseUserForm(responseRegistrationPet);
                 break;
             }catch (NamePetExcepetion e){
