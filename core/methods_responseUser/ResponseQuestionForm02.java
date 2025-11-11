@@ -21,13 +21,9 @@ public class ResponseQuestionForm02 {
                 } catch (IllegalArgumentException  e) {
                     throw new NamePetExcepetion("Tipo inválido! Digite 'CACHORRO' ou 'GATO'.");
                 }
-                Pet.responseUserForm(responseRegistrationPet);
                 break;
             } catch (NamePetExcepetion e) {
-                final String RED_BOLD = "\u001B[1m\u001B[31m";
-                final String RESET = "\u001B[0m";
-
-                System.out.println(RED_BOLD + e.getMessage() + RESET);
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
     }

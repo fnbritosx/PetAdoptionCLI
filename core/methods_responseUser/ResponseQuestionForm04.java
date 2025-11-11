@@ -29,7 +29,6 @@ public class ResponseQuestionForm04 {
                     numeroCasa = Pet.NAO_INFORMADO;
                 }
 
-                Pet.responseUserForm(numeroCasa);
                 break;
             } catch (TerminalExceptionCharacter e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
@@ -47,7 +46,6 @@ public class ResponseQuestionForm04 {
                     throw new TerminalExceptionCharacter("Entrada inválida: você não digitou um caractere válido.");
                 }
 
-                Pet.responseUserForm(cidade);
                 break;
             } catch (TerminalExceptionCharacter e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
@@ -65,7 +63,6 @@ public class ResponseQuestionForm04 {
                     throw new TerminalExceptionCharacter("Entrada inválida: você não digitou um caractere válido.");
                 }
 
-                Pet.responseUserForm(rua);
                 break;
             } catch (TerminalExceptionCharacter e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");

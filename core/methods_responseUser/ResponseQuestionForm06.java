@@ -26,7 +26,6 @@ public class ResponseQuestionForm06 {
                     responseRegistrationPet = Pet.NAO_INFORMADO;
                 }
 
-                Pet.responseUserForm(responseRegistrationPet);
                 break;
             } catch (TerminalExceptionNumber e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
