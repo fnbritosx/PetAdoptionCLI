@@ -1,12 +1,9 @@
 package core.methods_responseUser;
 
-import pet.Pet;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class RegistrationPet {
     public static void registrationPet() {
@@ -33,12 +30,17 @@ public class RegistrationPet {
                     ResponseQuestionForm04.responseQuestionForm04();
                 }
 
-                if (line.startsWith("5")){
+                if (line.startsWith("5")) {
                     ResponseQuestionForm05.responseQuestionForm05();
+                }
+                if (line.startsWith("6")) {
+                    ResponseQuestionForm06.responseQuestionForm06();
+                }
+                if (line.startsWith("7")) {
+                    ResponseQuestionForm07.responseQuestionForm07();
                 }
             }
 
-            System.out.println(Pet.getResponseUserForm());
         } catch (IOException e) {
             e.printStackTrace();
         }

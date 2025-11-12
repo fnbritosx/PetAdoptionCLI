@@ -1,9 +1,7 @@
 package core.methods_responseUser;
 
 import exception.NamePetExcepetion;
-import pet.Pet;
 import pet.TypePet;
-
 import java.util.Scanner;
 
 public class ResponseQuestionForm02 {
@@ -21,6 +19,7 @@ public class ResponseQuestionForm02 {
                 } catch (IllegalArgumentException  e) {
                     throw new NamePetExcepetion("Tipo inválido! Digite 'CACHORRO' ou 'GATO'.");
                 }
+
                 break;
             } catch (NamePetExcepetion e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");

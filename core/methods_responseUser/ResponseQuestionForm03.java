@@ -1,9 +1,7 @@
 package core.methods_responseUser;
 
 import exception.NamePetExcepetion;
-import pet.Pet;
 import pet.SexPet;
-
 import java.util.Scanner;
 
 public class ResponseQuestionForm03 {

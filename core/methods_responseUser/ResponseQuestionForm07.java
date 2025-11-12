@@ -2,7 +2,6 @@ package core.methods_responseUser;
 
 import exception.TerminalExceptionCharacter;
 import pet.Pet;
-
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -15,16 +14,16 @@ public class ResponseQuestionForm07 {
                 System.out.print("R: ");
                 String responseRegistrationPet = scanner.nextLine();
 
+                if (responseRegistrationPet.isEmpty()) {
+                    responseRegistrationPet = Pet.NAO_INFORMADO;
+                }
+
                 String regex = "^[A-Za-zÀ-ÿ ]+$";
                 Pattern pattern = Pattern.compile(regex);
                 boolean valido = pattern.matcher(responseRegistrationPet).matches();
 
-                if (!valido) {
+                if (!valido && !responseRegistrationPet.equals(Pet.NAO_INFORMADO)) {
                     throw new TerminalExceptionCharacter("Entrada inválida: digite a raça correta do seu pet.");
-                }
-
-                if (responseRegistrationPet.trim().isEmpty()) {
-                    responseRegistrationPet = Pet.NAO_INFORMADO;
                 }
 
                 break;
