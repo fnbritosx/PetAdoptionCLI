@@ -2,28 +2,27 @@ package core.methods_responseUser;
 
 import exception.TerminalExceptionCharacter;
 import pet.Pet;
+
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class ResponseQuestionForm04 {
-    public static void main(String[] args) {
-        responseQuestionForm04();
-    }
-
     public static void responseQuestionForm04() {
         Scanner scanner = new Scanner(System.in);
 
+        String numberHouse = "";
         while (true) {
             try {
                 System.out.print("i. Número da casa: ");
-                String numeroCasa = scanner.nextLine().trim();
+                numberHouse = scanner.nextLine().trim();
 
-                if (numeroCasa.isEmpty()) {
-                    numeroCasa = Pet.NAO_INFORMADO;
+                if (numberHouse.isEmpty()) {
+                    numberHouse = Pet.NAO_INFORMADO;
                 }
 
-                String regexNumeroCasa = "^[0-9]{1,5}$";
-                if (!Pattern.matches(regexNumeroCasa, numeroCasa) && !numeroCasa.equals(Pet.NAO_INFORMADO)) {
+                String regexNumberHouse = "^[0-9]{1,5}$";
+                if (!Pattern.matches(regexNumberHouse, numberHouse) && !numberHouse.equals(Pet.NAO_INFORMADO)) {
                     throw new TerminalExceptionCharacter("Entrada inválida: digite um número de até 5 dígitos.");
                 }
 
@@ -33,15 +32,31 @@ public class ResponseQuestionForm04 {
             }
         }
 
-        String cidade = "";
+        String city = "";
         while (true) {
             try {
                 System.out.print("ii. Cidade: ");
-                cidade = scanner.nextLine().trim();
+                city = scanner.nextLine().trim();
 
-                String regexCidade = "^[A-Za-zÀ-ú ]{1,40}$";
-                if (!Pattern.matches(regexCidade, cidade)) {
+                String regexCity = "^[A-Za-zÀ-ú ]{1,40}$";
+                if (!Pattern.matches(regexCity, city)) {
                     throw new TerminalExceptionCharacter("Entrada inválida: você não digitou uma cidade válida.");
+                }
+                break;
+            } catch (TerminalExceptionCharacter e) {
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+            }
+        }
+
+        String road = "";
+        while (true) {
+            try {
+                System.out.print("iii. Rua: ");
+                road = scanner.nextLine().trim();
+
+                String regexRua = "^[A-Za-zÀ-ú ]{1,47}[0-9]{0,3}$";
+                if (!Pattern.matches(regexRua, road)) {
+                    throw new TerminalExceptionCharacter("Entrada inválida: você não digitou uma rua válida.");
                 }
 
                 break;
@@ -50,21 +65,11 @@ public class ResponseQuestionForm04 {
             }
         }
 
-        String rua = "";
-        while (true) {
-            try {
-                System.out.print("iii. Rua: ");
-                rua = scanner.nextLine().trim();
-
-                String regexRua = "^[A-Za-zÀ-ú ]{1,47}[0-9]{0,3}$";
-                if (!Pattern.matches(regexRua, rua)) {
-                    throw new TerminalExceptionCharacter("Entrada inválida: você não digitou uma rua válida.");
-                }
-
-                break;
-            } catch (TerminalExceptionCharacter e) {
-                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
-            }
+        try {
+            String fullAddress = "4 - Rua " + road + ", " + numberHouse + ", " + city;
+            PetFormFileWriter.writerFile(PetFormFileWriter.finalFile, fullAddress);
+        } catch (IOException e) {
+            System.out.println("\u001B[1m\u001B[31mErro ao escrever no arquivo: " + e.getMessage() + "\u001B[0m");
         }
     }
 }

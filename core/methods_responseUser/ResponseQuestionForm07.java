@@ -2,6 +2,8 @@ package core.methods_responseUser;
 
 import exception.TerminalExceptionCharacter;
 import pet.Pet;
+
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -26,8 +28,11 @@ public class ResponseQuestionForm07 {
                     throw new TerminalExceptionCharacter("Entrada inválida: digite a raça correta do seu pet.");
                 }
 
+                String breedPet = "7 - " + responseRegistrationPet;
+                PetFormFileWriter.writerFile(PetFormFileWriter.finalFile, breedPet);
+
                 break;
-            } catch (TerminalExceptionCharacter e) {
+            } catch (TerminalExceptionCharacter | IOException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }

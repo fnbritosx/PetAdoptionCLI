@@ -2,6 +2,8 @@ package core.methods_responseUser;
 
 import exception.TerminalExceptionNumber;
 import pet.Pet;
+
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -26,8 +28,11 @@ public class ResponseQuestionForm05 {
                     throw new TerminalExceptionNumber("Entrada inválida: digite a idade do pet em anos, com até 2 dígitos e opcionalmente até 2 decimais (ex: 5, 3.5, 12.25).");
                 }
 
+                String agePet = "5 - " + responseRegistrationPet + " anos";
+                PetFormFileWriter.writerFile(PetFormFileWriter.finalFile, agePet);
+
                 break;
-            }catch (TerminalExceptionNumber e){
+            }catch (TerminalExceptionNumber | IOException e){
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
