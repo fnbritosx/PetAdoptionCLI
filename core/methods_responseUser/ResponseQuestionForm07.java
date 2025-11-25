@@ -1,6 +1,6 @@
 package core.methods_responseUser;
 
-import exception.TerminalExceptionCharacter;
+import exception.ResponseFormException;
 import pet.Pet;
 
 import java.io.IOException;
@@ -25,14 +25,14 @@ public class ResponseQuestionForm07 {
                 boolean valido = pattern.matcher(responseRegistrationPet).matches();
 
                 if (!valido && !responseRegistrationPet.equals(Pet.NAO_INFORMADO)) {
-                    throw new TerminalExceptionCharacter("Entrada inválida: digite a raça correta do seu pet.");
+                    throw new ResponseFormException("Entrada inválida: digite a raça correta do seu pet.");
                 }
 
                 String breedPet = "7 - " + responseRegistrationPet;
                 PetFormFileWriter.writerFile(PetFormFileWriter.finalFile, breedPet);
 
                 break;
-            } catch (TerminalExceptionCharacter | IOException e) {
+            } catch (ResponseFormException | IOException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }

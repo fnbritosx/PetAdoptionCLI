@@ -1,6 +1,6 @@
 package core.methods_responseUser;
 
-import exception.TerminalExceptionCharacter;
+import exception.ResponseFormException;
 import pet.Pet;
 
 import java.io.File;
@@ -26,7 +26,7 @@ public class ResponseQuestionForm01 {
                 boolean valido = pattern.matcher(responseRegistrationPet).matches();
 
                 if (!valido && !responseRegistrationPet.equals(Pet.NAO_INFORMADO)) {
-                    throw new TerminalExceptionCharacter("Entrada inválida: digite o nome correto do seu pet.");
+                    throw new ResponseFormException("Entrada inválida: digite o nome correto do seu pet.");
                 }
 
                 File filePath = PetFormFileWriter.createdFile(responseRegistrationPet);
@@ -35,7 +35,7 @@ public class ResponseQuestionForm01 {
                 PetFormFileWriter.writerFile(filePath, namePet);
 
                 break;
-            } catch (TerminalExceptionCharacter | IOException e) {
+            } catch (ResponseFormException | IOException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }

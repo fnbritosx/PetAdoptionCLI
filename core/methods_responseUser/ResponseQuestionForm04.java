@@ -1,6 +1,6 @@
 package core.methods_responseUser;
 
-import exception.TerminalExceptionCharacter;
+import exception.ResponseFormException;
 import pet.Pet;
 
 import java.io.IOException;
@@ -23,11 +23,11 @@ public class ResponseQuestionForm04 {
 
                 String regexNumberHouse = "^[0-9]{1,5}$";
                 if (!Pattern.matches(regexNumberHouse, numberHouse) && !numberHouse.equals(Pet.NAO_INFORMADO)) {
-                    throw new TerminalExceptionCharacter("Entrada inválida: digite um número de até 5 dígitos.");
+                    throw new ResponseFormException("Entrada inválida: digite um número de até 5 dígitos.");
                 }
 
                 break;
-            } catch (TerminalExceptionCharacter e) {
+            } catch (ResponseFormException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
@@ -40,10 +40,10 @@ public class ResponseQuestionForm04 {
 
                 String regexCity = "^[A-Za-zÀ-ú ]{1,40}$";
                 if (!Pattern.matches(regexCity, city)) {
-                    throw new TerminalExceptionCharacter("Entrada inválida: você não digitou uma cidade válida.");
+                    throw new ResponseFormException("Entrada inválida: você não digitou uma cidade válida.");
                 }
                 break;
-            } catch (TerminalExceptionCharacter e) {
+            } catch (ResponseFormException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
@@ -56,11 +56,11 @@ public class ResponseQuestionForm04 {
 
                 String regexRua = "^[A-Za-zÀ-ú ]{1,47}[0-9]{0,3}$";
                 if (!Pattern.matches(regexRua, road)) {
-                    throw new TerminalExceptionCharacter("Entrada inválida: você não digitou uma rua válida.");
+                    throw new ResponseFormException("Entrada inválida: você não digitou uma rua válida.");
                 }
 
                 break;
-            } catch (TerminalExceptionCharacter e) {
+            } catch (ResponseFormException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }

@@ -1,6 +1,6 @@
 package core.methods_responseUser;
 
-import exception.NamePetExcepetion;
+import exception.ResponseFormException;
 import pet.TypePet;
 
 import java.io.File;
@@ -20,14 +20,14 @@ public class ResponseQuestionForm02 {
                 try {
                     typePet = TypePet.valueOf(responseRegistrationPet);
                 } catch (IllegalArgumentException  e) {
-                    throw new NamePetExcepetion("Tipo inválido! Digite 'CACHORRO' ou 'GATO'.");
+                    throw new ResponseFormException("Tipo inválido! Digite 'CACHORRO' ou 'GATO'.");
                 }
 
                 String typePetResponse = "2 - " + responseRegistrationPet;
                 PetFormFileWriter.writerFile(PetFormFileWriter.finalFile, typePetResponse);
 
                 break;
-            } catch (NamePetExcepetion | IOException e) {
+            } catch (ResponseFormException | IOException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }

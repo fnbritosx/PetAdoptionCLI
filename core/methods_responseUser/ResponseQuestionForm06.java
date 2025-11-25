@@ -1,6 +1,7 @@
 package core.methods_responseUser;
 
-import exception.TerminalExceptionNumber;
+import exception.MenuNumberException;
+import exception.ResponseFormException;
 import pet.Pet;
 
 import java.io.IOException;
@@ -24,14 +25,14 @@ public class ResponseQuestionForm06 {
                 boolean valido = pattern.matcher(responseRegistrationPet).matches();
 
                 if (!valido && !responseRegistrationPet.equals(Pet.NAO_INFORMADO)) {
-                    throw new TerminalExceptionNumber("Entrada inválida: digite um valor de 0 a 20.");
+                    throw new ResponseFormException("Entrada inválida: digite um valor de 0 a 20.");
                 }
 
                 String weightPet = "6 - " + responseRegistrationPet +"Kg";
                 PetFormFileWriter.writerFile(PetFormFileWriter.finalFile, weightPet);
 
                 break;
-            } catch (TerminalExceptionNumber | IOException e) {
+            } catch (ResponseFormException | IOException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }

@@ -1,19 +1,17 @@
 package core.start;
 
 import core.methods_responseUser.RegistrationPet;
-import exception.TerminalExceptionCharacter;
-import exception.TerminalExceptionNumber;
-import exception.TerminalNullException;
+import exception.MenuNumberException;
 
 import java.util.Scanner;
 
 public class StartCLI {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         startTerminal();
     }
 
-    public static void startTerminal() throws InterruptedException {
+    public static void startTerminal() {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -30,19 +28,19 @@ public class StartCLI {
                 String responseUser = scanner.nextLine();
 
                 if (responseUser.isBlank()) {
-                    throw new TerminalNullException();
+                    throw new MenuNumberException();
                 }
 
                 for (int i = 0; i < responseUser.length(); i++) {
                     if (!Character.isDigit(responseUser.charAt(i))) {
-                        throw new TerminalExceptionCharacter();
+                        throw new MenuNumberException();
                     }
                 }
 
                 int responseUserInt = Integer.parseInt(responseUser);
 
                 if (responseUserInt > 6 || responseUserInt <= 0) {
-                    throw new TerminalExceptionNumber();
+                    throw new MenuNumberException();
                 }
 
                 if (responseUserInt == 6) {
@@ -54,9 +52,8 @@ public class StartCLI {
                     break;
                 }
 
-            } catch (TerminalNullException | TerminalExceptionCharacter | TerminalExceptionNumber e) {
-                System.out.println(e.getMessage());
-                Thread.sleep(1000);
+            } catch (MenuNumberException e) {
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
         scanner.close();
