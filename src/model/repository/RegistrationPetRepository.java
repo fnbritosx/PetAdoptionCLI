@@ -8,20 +8,21 @@ import java.util.List;
 
 public class RegistrationPetRepository {
     private final List<String> responsesUser = new ArrayList<>();
-    private List<String> questionsForm = new ArrayList<>();
+     private final File pathForm = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\core\\form\\form.txt");
 
-
-    public File getFormFile() {
-        return new File ("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\core\\form\\form.txt");
+    public File getPathForm() {
+        return pathForm;
     }
 
-    public List<String> getQuestionsForm(File path) throws IOException {
-        return questionsForm = Files.readAllLines(path.toPath());
+    public List<String> getQuestionsForm() throws IOException {
+        return Files.readAllLines(pathForm.toPath());
     }
 
-    public List<String> storeResponse(String response){
-        responsesUser.add(response);
-
+    public List<String> getListResponseUser(){
         return responsesUser;
+    }
+
+    public void storeResponse(String response){
+        responsesUser.add(response);
     }
 }

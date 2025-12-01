@@ -1,7 +1,11 @@
 package exception;
 
 public class MenuNumberException extends RuntimeException {
-    public MenuNumberException() {
+    public MenuNumberException(String message) {
         super(message);
+    }
+
+    public MenuNumberException() {
+        super("Entrada inválida: Por favor, digite um número válido!");
     }
 }
