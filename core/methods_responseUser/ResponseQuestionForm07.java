@@ -1,7 +1,7 @@
 package core.methods_responseUser;
 
 import exception.ResponseFormException;
-import pet.Pet;
+import src.model.entity.Pet;
 
 import java.io.IOException;
 import java.util.Scanner;

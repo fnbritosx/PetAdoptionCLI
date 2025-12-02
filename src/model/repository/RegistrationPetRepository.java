@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RegistrationPetRepository {
     private final List<String> responsesUser = new ArrayList<>();
-     private final File pathForm = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\core\\form\\form.txt");
+    private static final File pathForm = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\core\\form\\form.txt");
 
     public File getPathForm() {
         return pathForm;
@@ -18,11 +18,11 @@ public class RegistrationPetRepository {
         return Files.readAllLines(pathForm.toPath());
     }
 
-    public List<String> getListResponseUser(){
+    public List<String> getListResponseUser() {
         return responsesUser;
     }
 
-    public void storeResponse(String response){
+    public void saveResponse(String response) {
         responsesUser.add(response);
     }
 }

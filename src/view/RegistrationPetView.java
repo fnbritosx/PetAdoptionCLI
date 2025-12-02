@@ -10,7 +10,7 @@ public class RegistrationPetView {
     }
 
     public String responseUser (){
-        System.out.println("R: ");
+        System.out.print("R: ");
         return scannerResponseUser.nextLine();
     }
 }

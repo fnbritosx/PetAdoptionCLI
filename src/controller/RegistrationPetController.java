@@ -1,5 +1,6 @@
 package src.controller;
 
+import exception.ResponseFormException;
 import src.model.repository.RegistrationPetRepository;
 import src.model.service.RegistrationPetService;
 import src.view.RegistrationPetView;
@@ -19,10 +20,32 @@ public class RegistrationPetController {
     }
 
     public void start() throws IOException {
-        for(String lines : registrationPetRepository.getQuestionsForm()){
+        int index = 0;
+
+        for (String lines : registrationPetRepository.getQuestionsForm()) {
             registrationPetView.readerLineForm(lines);
-            registrationPetRepository.storeResponse(registrationPetView.responseUser());
+            while (true) {
+                try {
+                    String response = registrationPetView.responseUser();
+
+                    switch (index) {
+                        case 0:
+                            registrationPetService.validateName(response);
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                    }
+                    registrationPetRepository.saveResponse(response);
+                    break;
+                } catch (ResponseFormException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            index++;
         }
         System.out.println(registrationPetRepository.getListResponseUser());
     }
 }
+

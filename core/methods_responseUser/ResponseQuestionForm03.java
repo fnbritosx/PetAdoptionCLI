@@ -1,9 +1,8 @@
 package core.methods_responseUser;
 
 import exception.ResponseFormException;
-import pet.SexPet;
+import src.model.entity.SexPet;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 

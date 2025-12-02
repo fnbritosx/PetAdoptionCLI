@@ -1,4 +1,4 @@
-package pet;
+package src.model.entity;
 
 public class Pet {
 
