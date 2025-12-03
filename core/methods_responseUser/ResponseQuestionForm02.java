@@ -1,7 +1,7 @@
 package core.methods_responseUser;
 
 import exception.ResponseFormException;
-import src.model.entity.TypePet;
+import src.model.entity.PetType;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -11,13 +11,13 @@ public class ResponseQuestionForm02 {
         while (true) {
             try {
                 System.out.print("R: ");
-                TypePet typePet = null;
+                PetType petType = null;
 
                 Scanner scanner = new Scanner(System.in);
                 String responseRegistrationPet = scanner.nextLine().toUpperCase().trim();
 
                 try {
-                    typePet = TypePet.valueOf(responseRegistrationPet);
+                    petType = PetType.valueOf(responseRegistrationPet);
                 } catch (IllegalArgumentException  e) {
                     throw new ResponseFormException("Tipo inválido! Digite 'CACHORRO' ou 'GATO'.");
                 }

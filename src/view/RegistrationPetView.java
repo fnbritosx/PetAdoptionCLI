@@ -13,4 +13,10 @@ public class RegistrationPetView {
         System.out.print("R: ");
         return scannerResponseUser.nextLine();
     }
+
+    public void questionFourForm(){
+        System.out.println("i. Número da casa");
+        System.out.println("ii. Cidade");
+        System.out.println("iii. Rua");
+    }
 }

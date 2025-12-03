@@ -1,7 +1,7 @@
 package core.methods_responseUser;
 
 import exception.ResponseFormException;
-import src.model.entity.SexPet;
+import src.model.entity.PetSex;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -11,13 +11,13 @@ public class ResponseQuestionForm03 {
         while (true) {
             try {
                 System.out.print("R: ");
-                SexPet sexPet = null;
+                PetSex petSex = null;
 
                 Scanner scanner = new Scanner(System.in);
                 String responseRegistrationPet = scanner.nextLine().toUpperCase().trim();
 
                 try {
-                    sexPet = SexPet.valueOf(responseRegistrationPet);
+                    petSex = PetSex.valueOf(responseRegistrationPet);
                 } catch (IllegalArgumentException e) {
                     throw new ResponseFormException("Tipo inválido! Digite 'MACHO' ou 'FÊMEA'.");
                 }

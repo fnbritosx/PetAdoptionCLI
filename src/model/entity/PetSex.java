@@ -1,6 +1,6 @@
 package src.model.entity;
 
-public enum SexPet {
+public enum PetSex {
     MACHO,
     FEMEA;
 }

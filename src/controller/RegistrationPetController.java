@@ -19,33 +19,59 @@ public class RegistrationPetController {
         this.registrationPetRepository = new RegistrationPetRepository();
     }
 
+    private void askAddress() {
+        for (String question : registrationPetRepository.getSubQuestions()) {
+            registrationPetView.readerLineForm(question);
+
+            while (true) {
+                try {
+                    String resposta = registrationPetView.responseUser();
+                    registrationPetRepository.saveResponse(resposta);
+                    break;
+                } catch (ResponseFormException e) {
+                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                }
+            }
+        }
+    }
+
     public void start() throws IOException {
-        int index = 0;
+        int count = 0;
 
         for (String lines : registrationPetRepository.getQuestionsForm()) {
             registrationPetView.readerLineForm(lines);
+
             while (true) {
+
                 try {
                     String response = registrationPetView.responseUser();
 
-                    switch (index) {
+                    switch (count) {
                         case 0:
-                            registrationPetService.validateName(response);
+                            response = registrationPetService.validateName(response);
                             break;
                         case 1:
+                            response = String.valueOf(registrationPetService.validateType(response));
                             break;
                         case 2:
+                            response = String.valueOf(registrationPetService.validateSex(response));
+                            break;
+                        case 3:
+                            response ="";
+                            askAddress();
                             break;
                     }
+
                     registrationPetRepository.saveResponse(response);
                     break;
                 } catch (ResponseFormException e) {
-                    System.out.println(e.getMessage());
+                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
                 }
             }
-            index++;
+            count++;
         }
         System.out.println(registrationPetRepository.getListResponseUser());
     }
 }
+
 

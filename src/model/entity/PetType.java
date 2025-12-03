@@ -1,6 +1,6 @@
 package src.model.entity;
 
-public enum TypePet {
+public enum PetType {
     CACHORRO,
     GATO;
 }
