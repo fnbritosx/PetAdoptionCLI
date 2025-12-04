@@ -1,7 +1,5 @@
 package src.model.repository;
 
-import src.model.entity.Pet;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,16 +8,7 @@ import java.util.List;
 
 public class RegistrationPetRepository {
     private final List<String> responsesUser = new ArrayList<>();
-    private static final File pathForm = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\core\\form\\form.txt");
-    private final List<String> subQuestions = List.of(
-            "Número da casa:",
-            "Rua:",
-            "Cidade:"
-    );
-
-    public List<String> getSubQuestions(){
-        return subQuestions;
-    }
+    private static final File pathForm = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\core\\form\\form.txt");
 
     public File getPathForm() {
         return pathForm;
@@ -36,5 +25,4 @@ public class RegistrationPetRepository {
     public void saveResponse(String response) {
         responsesUser.add(response);
     }
-
 }

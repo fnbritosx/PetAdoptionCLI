@@ -6,6 +6,8 @@ import src.model.service.RegistrationPetService;
 import src.view.RegistrationPetView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class RegistrationPetController {
@@ -19,50 +21,72 @@ public class RegistrationPetController {
         this.registrationPetRepository = new RegistrationPetRepository();
     }
 
-    private void askAddress() {
-        for (String question : registrationPetRepository.getSubQuestions()) {
-            registrationPetView.readerLineForm(question);
+    private List<String> askAddress() {
+        List<String> responses = new ArrayList<>();
 
+        for (String question : registrationPetView.getSubQuestions()) {
             while (true) {
+                registrationPetView.readerLineForm(question);
                 try {
-                    String resposta = registrationPetView.responseUser();
-                    registrationPetRepository.saveResponse(resposta);
+                    String response = registrationPetView.responseUser();
+
+                    if (question.startsWith("i.")) {
+                        response = registrationPetService.validateHouseNumber(response);
+                    }
+                    if (question.startsWith("ii.")) {
+                        registrationPetService.validateRoad(response);
+                    }
+                    if (question.startsWith("iii.")) {
+                        registrationPetService.validateCity(response);
+                    }
+
+                    responses.add(response);
                     break;
+
                 } catch (ResponseFormException e) {
                     System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
                 }
             }
         }
+        return responses;
     }
+
 
     public void start() throws IOException {
         int count = 0;
+        String response = null;
 
         for (String lines : registrationPetRepository.getQuestionsForm()) {
-            registrationPetView.readerLineForm(lines);
 
             while (true) {
-
+                registrationPetView.readerLineForm(lines);
                 try {
-                    String response = registrationPetView.responseUser();
+
 
                     switch (count) {
                         case 0:
+                            response = registrationPetView.responseUser();
                             response = registrationPetService.validateName(response);
+                            registrationPetRepository.saveResponse(response);
                             break;
                         case 1:
-                            response = String.valueOf(registrationPetService.validateType(response));
+                            response = registrationPetView.responseUser();
+                            registrationPetService.validateType(response);
+                            registrationPetRepository.saveResponse(response);
                             break;
                         case 2:
-                            response = String.valueOf(registrationPetService.validateSex(response));
+                            response = registrationPetView.responseUser();
+                            registrationPetService.validateSex(response);
+                            registrationPetRepository.saveResponse(response);
                             break;
+
                         case 3:
-                            response ="";
-                            askAddress();
+                            List<String> addressResponses = askAddress();
+                            for (String r : addressResponses) {
+                                registrationPetRepository.saveResponse(r);
+                            }
                             break;
                     }
-
-                    registrationPetRepository.saveResponse(response);
                     break;
                 } catch (ResponseFormException e) {
                     System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");

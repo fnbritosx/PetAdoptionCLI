@@ -1,7 +1,7 @@
 package core.methods_responseUser;
 
 import exception.ResponseFormException;
-import src.model.entity.Pet;
+import src.model.entity.RegistrationEnum;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class ResponseQuestionForm05 {
                 String responseRegistrationPet = scanner.nextLine();
 
                 if (responseRegistrationPet.isEmpty()){
-                    responseRegistrationPet = Pet.NAO_INFORMADO;
+                    responseRegistrationPet = RegistrationEnum.NAO_INFORMADO;
                 }
 
                 String regex = "^[0-9]{1,2}([.,][0-9]{1,2})?$";
@@ -24,7 +24,7 @@ public class ResponseQuestionForm05 {
                 Pattern pattern = Pattern.compile(regex);
                 boolean valido = pattern.matcher(responseRegistrationPet).matches();
 
-                if (!valido && !responseRegistrationPet.equals(Pet.NAO_INFORMADO)) {
+                if (!valido && !responseRegistrationPet.equals(RegistrationEnum.NAO_INFORMADO)) {
                     throw new ResponseFormException("Entrada inválida: digite a idade do pet em anos, com até 2 dígitos e opcionalmente até 2 decimais (ex: 5, 3.5, 12.25).");
                 }
 

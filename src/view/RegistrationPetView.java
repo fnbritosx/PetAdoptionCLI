@@ -1,5 +1,6 @@
 package src.view;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class RegistrationPetView {
@@ -13,10 +14,13 @@ public class RegistrationPetView {
         System.out.print("R: ");
         return scannerResponseUser.nextLine();
     }
+    private final List<String> subQuestions = List.of(
+            "i. Número da casa",
+            "ii. Rua",
+            "iii. Cidade"
+    );
 
-    public void questionFourForm(){
-        System.out.println("i. Número da casa");
-        System.out.println("ii. Cidade");
-        System.out.println("iii. Rua");
+    public List<String> getSubQuestions(){
+        return subQuestions;
     }
 }
