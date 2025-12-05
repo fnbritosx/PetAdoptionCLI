@@ -62,6 +62,7 @@ public class RegistrationPetController {
         switch (count) {
             case 0:
                 response = registrationPetView.responseUser();
+                registrationPetRepository.createdFile(response);
                 pet.setName(registrationPetService.validateName(response));
                 break;
             case 1:
@@ -80,11 +81,11 @@ public class RegistrationPetController {
                 break;
             case 4:
                 response = registrationPetView.responseUser();
-                pet.setAge(Double.parseDouble(registrationPetService.validateAge(response)));
+                pet.setAge((registrationPetService.validateAge(response)));
                 break;
             case 5:
                 response = registrationPetView.responseUser();
-                pet.setWeight(Double.parseDouble(registrationPetService.validateWeight(response)));
+                pet.setWeight(registrationPetService.validateWeight(response));
                 break;
             case 6:
                 response = registrationPetView.responseUser();
@@ -109,9 +110,9 @@ public class RegistrationPetController {
             }
             count++;
         }
-        registrationPetRepository.saveResponse(pet);
+        registrationPetRepository.savePet(pet);
 
-        System.out.println(registrationPetRepository.getListResponseUser());
+        System.out.println(pet);
     }
 }
 

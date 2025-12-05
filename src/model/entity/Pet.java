@@ -7,14 +7,26 @@ public class Pet {
     private String houseNumber;
     private String street;
     private String city;
-    private double age;
-    private double weight;
+    private String age;
+    private String weight;
     private String breed;
 
 
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return  "1 - " + name +  "\n" +
+                "2 - " + type + "\n" +
+                "3 - " + sex + "\n" +
+                "5 - Rua " + street +", " + houseNumber + ", " + city + "\n" +
+                "6 - " + age + " anos" + "\n" +
+                "7 - " + weight + "kg" + "\n" +
+                "8 - " + breed + "\n";
+    }
+
 
     public void setType(PetType type) {
         this.type = type;
@@ -36,11 +48,11 @@ public class Pet {
         this.city = city;
     }
 
-    public void setAge(double age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
-    public void setWeight(double weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 

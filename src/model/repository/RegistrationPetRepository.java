@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrationPetRepository {
-    private final List<Pet> responsesUser = new ArrayList<>();
+    private final List<Pet> pets = new ArrayList<>();
     private static final File pathForm = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\core\\form\\form.txt");
 
     public File getPathForm() {
@@ -23,14 +23,14 @@ public class RegistrationPetRepository {
     }
 
     public List<Pet> getListResponseUser() {
-        return responsesUser;
+        return pets;
     }
 
-    public void saveResponse(Pet pet) {
-        responsesUser.add(pet);
+    public void savePet(Pet pet) {
+        pets.add(pet);
     }
 
-        public static File createdFile(String petName) throws IOException {
+        public File createdFile(String petName) {
             File finalFile = null;
 
             LocalDateTime localDateTime = LocalDateTime.now();
@@ -39,9 +39,6 @@ public class RegistrationPetRepository {
 
             finalFile = new File(pathForm + "\\" + dateFormated + "-" + petName.toUpperCase().replaceAll("\\s+", "") + ".txt");
 
-            if (!finalFile.exists()) {
-                finalFile.createNewFile();
-            }
             return finalFile;
         }
 }
