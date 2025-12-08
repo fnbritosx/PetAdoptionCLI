@@ -19,11 +19,11 @@ public class Pet {
     @Override
     public String toString() {
         return  "1 - " + name +  "\n" +
-                "2 - " + type + "\n" +
-                "3 - " + sex + "\n" +
-                "5 - Rua " + street +", " + houseNumber + ", " + city + "\n" +
-                "6 - " + age + " anos" + "\n" +
-                "7 - " + weight + "kg" + "\n" +
+                "2 - " + type.getFormatted() + "\n" +
+                "3 - " + sex.getFormatted() + "\n" +
+                "5 - " + street +", " + houseNumber + ", " + city + "\n" +
+                "6 - " + age + "\n" +
+                "7 - " + weight + "\n" +
                 "8 - " + breed + "\n";
     }
 

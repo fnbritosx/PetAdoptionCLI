@@ -39,7 +39,7 @@ public class RegistrationPetController {
                     }
                     if (question.startsWith("ii.")) {
                         response = registrationPetView.responseUser();
-                        registrationPetService.validateRoad(response);
+                        response = registrationPetService.validateRoad(response);
                     }
                     if (question.startsWith("iii.")) {
                         response = registrationPetView.responseUser();
@@ -98,9 +98,9 @@ public class RegistrationPetController {
         int count = 0;
 
         for (String line : registrationPetRepository.getQuestionsForm()) {
-            registrationPetView.readerLineForm(line);
 
             while (true) {
+                registrationPetView.readerLineForm(line);
                 try {
                     handleQuestion(count);
                     break;

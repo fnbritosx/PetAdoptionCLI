@@ -1,7 +1,7 @@
 package src.model.service;
 
 import exception.ResponseFormException;
-import src.model.entity.RegistrationEnum;
+import src.model.entity.RegistrationConstants;
 import src.model.entity.PetSex;
 import src.model.entity.PetType;
 
@@ -12,7 +12,7 @@ public class RegistrationPetService {
     public String validateName(String nameInput) {
 
         if (nameInput == null|| nameInput.isBlank()) {
-            return RegistrationEnum.NAO_INFORMADO;
+            return RegistrationConstants.NAO_INFORMADO;
         }
 
         Pattern WORD = Pattern.compile("^[A-Za-zÀ-ÿ]+$");
@@ -46,7 +46,7 @@ public class RegistrationPetService {
 
     public PetType validateType(String typeInput) {
         try {
-            return PetType.valueOf(typeInput.toUpperCase().trim());
+            return PetType.valueOf(typeInput.trim().toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ResponseFormException("Tipo inválido! Digite 'CACHORRO' ou 'GATO'.");
         }
@@ -54,7 +54,7 @@ public class RegistrationPetService {
 
     public PetSex validateSex(String sexInput) {
         try {
-            return PetSex.valueOf(sexInput.toUpperCase().trim());
+            return PetSex.valueOf(sexInput.trim().toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ResponseFormException("Tipo inválido! Digite 'MACHO' ou 'FÊMEA'.");
         }
@@ -62,19 +62,23 @@ public class RegistrationPetService {
 
     public String validateHouseNumber(String houseNumber) {
         if (houseNumber.isBlank()) {
-            return RegistrationEnum.NAO_INFORMADO;
+            return RegistrationConstants.NAO_INFORMADO;
         }
 
         String regexNumberHouse = "^[0-9]{1,5}$";
-        if (!Pattern.matches(regexNumberHouse, houseNumber) && !houseNumber.equals(RegistrationEnum.NAO_INFORMADO)) {
+        if (!Pattern.matches(regexNumberHouse, houseNumber) && !houseNumber.equals(RegistrationConstants.NAO_INFORMADO)) {
             throw new ResponseFormException("Entrada inválida: Digite um número de até 5 dígitos.");
         }
 
         return houseNumber;
     }
 
-    public void validateCity(String city) {
-        city = city.trim().replaceAll("\\s", "");
+    public String validateCity(String city) {
+        if (city == null || city.isBlank()) {
+            throw new ResponseFormException("A cidade não pode estar vazia.");
+        }
+
+        city = city.trim().replaceAll(" +", " ");
 
         if (city.length() < 2 || city.length() > 40) {
             throw new ResponseFormException("Entrada inválida: A cidade deve ter entre 2 e 40 caracteres.");
@@ -85,13 +89,18 @@ public class RegistrationPetService {
         }
 
         if (!city.matches(".*[aeiouAEIOUáéíóúÁÉÍÓÚ].*")) {
-            throw new ResponseFormException("Entrada inválida: O nome da cidade não é inválido.");
+            throw new ResponseFormException("Entrada inválida: O nome da cidade não é válido.");
         }
+        return city;
     }
 
 
-    public void validateRoad(String road) {
-        road = road.trim().replaceAll("\\s", "");
+    public String validateRoad(String road) {
+        if (road == null || road.isBlank()) {
+            throw new ResponseFormException("O nome da rua não pode estar vazio.");
+        }
+
+        road = road.trim().replaceAll(" +", " ");
 
         if (road.length() < 3) {
             throw new ResponseFormException("Entrada inválida: Nome da rua muito curto.");
@@ -104,14 +113,19 @@ public class RegistrationPetService {
         String namePart = road.replaceAll("\\d", "").trim();
         if (!namePart.matches(".*[aeiouAEIOUáéíóúÁÉÍÓÚ].*")) {
             throw new ResponseFormException("Entrada inválida: O nome da rua parece inválido.");
+
         }
+        if (!road.toLowerCase().startsWith("rua ")) {
+            return "Rua " + road;
+        }
+        return road;
     }
 
 
     public String validateAge(String age) {
         if (age == null || age.isBlank()) {
 
-            return RegistrationEnum.NAO_INFORMADO;
+            return RegistrationConstants.NAO_INFORMADO;
         }
 
         String regex = "^[0-9]{1,2}([.,][0-9])?$";
@@ -119,26 +133,28 @@ public class RegistrationPetService {
         Pattern pattern = Pattern.compile(regex);
         boolean valid = pattern.matcher(age).matches();
 
-        if (!valid && !age.equals(RegistrationEnum.NAO_INFORMADO)) {
+        if (!valid && !age.equals(RegistrationConstants.NAO_INFORMADO)) {
             throw new ResponseFormException(
-                    "Entrada inválida: Informe a idade em anos, com 1 ou 2 dígitos e opcionalmente 1 casa decimal. Exemplos: 5, 3.5, 12.");
-
+                    "Entrada inválida: informe apenas números representando a idade em anos. " +
+                            "Use 1 ou 2 dígitos, com opção de 1 casa decimal. " +
+                            "Exemplos válidos: 5, 12, 3.5."
+            );
         }
-        return age;
+        return age + " anos";
     }
 
     public String validateWeight(String weight) {
         if (weight == null || weight.isBlank()) {
-            return RegistrationEnum.NAO_INFORMADO;
+            return RegistrationConstants.NAO_INFORMADO;
         }
 
-        String regex = "^([0-9]{1,2}|60)([.,][0-9]{1,2})?$";
+        String regex = "^(\\d{1,2}|60)([.,]\\d{1,2})?$";
 
-        boolean valid = Pattern.matches(regex, weight);
-
-        if (!valid) {
+        if (!Pattern.matches(regex, weight)) {
             throw new ResponseFormException(
-                    "Entrada inválida: Informe o peso entre 0.5 e 60 kg, com no máximo 2 casas decimais. Exemplos: 0.5, 7.25, 12, 60"
+                    "Entrada inválida: informe apenas números representando o peso em quilogramas. " +
+                            "O valor deve estar entre 0.5 e 60, com no máximo 2 casas decimais. " +
+                            "Exemplos válidos: 0.5, 7.25, 12, 60."
             );
         }
 
@@ -148,20 +164,21 @@ public class RegistrationPetService {
             throw new ResponseFormException("Peso deve estar entre 0.5 e 60 kg.");
         }
 
-        return weight;
+        return weight + " kg";
     }
+
 
 
     public String validateBreed(String breed){
         if (breed == null || breed.isBlank()) {
-            return RegistrationEnum.NAO_INFORMADO;
+            return RegistrationConstants.NAO_INFORMADO;
         }
 
         String regex = "^[A-Za-zÀ-ÿ ]+$";
         Pattern pattern = Pattern.compile(regex);
         boolean valid = pattern.matcher(breed).matches();
 
-        if (!valid && !breed.equals(RegistrationEnum.NAO_INFORMADO)) {
+        if (!valid && !breed.equals(RegistrationConstants.NAO_INFORMADO)) {
             throw new ResponseFormException("Entrada inválida: Digite a raça correta do seu pet.");
         }
         return breed;

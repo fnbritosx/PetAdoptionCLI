@@ -1,7 +1,7 @@
 package core.methods_responseUser;
 
 import exception.ResponseFormException;
-import src.model.entity.RegistrationEnum;
+import src.model.entity.RegistrationConstants;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -16,14 +16,14 @@ public class ResponseQuestionForm06 {
                 String responseRegistrationPet = scanner.nextLine();
 
                 if (responseRegistrationPet.isEmpty()){
-                    responseRegistrationPet = RegistrationEnum.NAO_INFORMADO;
+                    responseRegistrationPet = RegistrationConstants.NAO_INFORMADO;
                 }
 
                 String regex = "^(?:[0-9]|1[0-9]|20)$";
                 Pattern pattern = Pattern.compile(regex);
                 boolean valido = pattern.matcher(responseRegistrationPet).matches();
 
-                if (!valido && !responseRegistrationPet.equals(RegistrationEnum.NAO_INFORMADO)) {
+                if (!valido && !responseRegistrationPet.equals(RegistrationConstants.NAO_INFORMADO)) {
                     throw new ResponseFormException("Entrada inválida: digite um valor de 0 a 20.");
                 }
 
