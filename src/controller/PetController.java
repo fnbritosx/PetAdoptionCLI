@@ -57,12 +57,11 @@ public class PetController {
         return responses;
     }
 
-    private void handleQuestion(int count) throws ResponseFormException {
+    private void handleQuestion(int count) throws ResponseFormException, IOException {
         String response;
         switch (count) {
             case 0:
                 response = petView.responseUser();
-                petRepository.createdFile(response);
                 pet.setName(petService.validateName(response));
                 break;
             case 1:
@@ -111,6 +110,8 @@ public class PetController {
             count++;
         }
         petRepository.savePet(pet);
+
+        petRepository.createdFile(pet.getName());
 
         System.out.println(pet);
     }

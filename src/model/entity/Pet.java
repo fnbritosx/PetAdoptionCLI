@@ -27,6 +27,9 @@ public class Pet {
                 "8 - " + breed + "\n";
     }
 
+    public String getName() {
+        return name;
+    }
 
     public void setType(PetType type) {
         this.type = type;
