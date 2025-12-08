@@ -1,7 +1,7 @@
 package core.methods_responseUser;
 
 import exception.ResponseFormException;
-import src.model.entity.RegistrationConstants;
+import src.model.entity.PetConstants;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,14 +17,14 @@ public class ResponseQuestionForm07 {
                 String responseRegistrationPet = scanner.nextLine();
 
                 if (responseRegistrationPet.isEmpty()) {
-                    responseRegistrationPet = RegistrationConstants.NAO_INFORMADO;
+                    responseRegistrationPet = PetConstants.NAO_INFORMADO;
                 }
 
                 String regex = "^[A-Za-zÀ-ÿ ]+$";
                 Pattern pattern = Pattern.compile(regex);
                 boolean valido = pattern.matcher(responseRegistrationPet).matches();
 
-                if (!valido && !responseRegistrationPet.equals(RegistrationConstants.NAO_INFORMADO)) {
+                if (!valido && !responseRegistrationPet.equals(PetConstants.NAO_INFORMADO)) {
                     throw new ResponseFormException("Entrada inválida: digite a raça correta do seu pet.");
                 }
 

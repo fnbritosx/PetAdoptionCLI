@@ -9,12 +9,12 @@ import java.io.IOException;
 public class MenuController {
     private final MenuView menuView;
     private final MenuService menuService;
-    private final RegistrationPetController registrationPetController;
+    private final PetController petController;
 
     public MenuController() {
         this.menuView = new MenuView();
         this.menuService = new MenuService();
-        this.registrationPetController = new RegistrationPetController();
+        this.petController = new PetController();
     }
 
     public void start() {
@@ -26,7 +26,7 @@ public class MenuController {
                 int numberResponse = Integer.parseInt(response);
                 switch (numberResponse) {
                     case 1:
-                        registrationPetController.start();
+                        petController.start();
                         break;
                     case 2:
                         break;

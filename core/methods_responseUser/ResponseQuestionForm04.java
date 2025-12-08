@@ -1,7 +1,7 @@
 package core.methods_responseUser;
 
 import exception.ResponseFormException;
-import src.model.entity.RegistrationConstants;
+import src.model.entity.PetConstants;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -18,11 +18,11 @@ public class ResponseQuestionForm04 {
                 numberHouse = scanner.nextLine().trim();
 
                 if (numberHouse.isEmpty()) {
-                    numberHouse = RegistrationConstants.NAO_INFORMADO;
+                    numberHouse = PetConstants.NAO_INFORMADO;
                 }
 
                 String regexNumberHouse = "^[0-9]{1,5}$";
-                if (!Pattern.matches(regexNumberHouse, numberHouse) && !numberHouse.equals(RegistrationConstants.NAO_INFORMADO)) {
+                if (!Pattern.matches(regexNumberHouse, numberHouse) && !numberHouse.equals(PetConstants.NAO_INFORMADO)) {
                     throw new ResponseFormException("Entrada inválida: digite um número de até 5 dígitos.");
                 }
 

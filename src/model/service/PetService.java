@@ -1,18 +1,18 @@
 package src.model.service;
 
 import exception.ResponseFormException;
-import src.model.entity.RegistrationConstants;
+import src.model.entity.PetConstants;
 import src.model.entity.PetSex;
 import src.model.entity.PetType;
 
 import java.util.regex.Pattern;
 
-public class RegistrationPetService {
+public class PetService {
 
     public String validateName(String nameInput) {
 
         if (nameInput == null|| nameInput.isBlank()) {
-            return RegistrationConstants.NAO_INFORMADO;
+            return PetConstants.NAO_INFORMADO;
         }
 
         Pattern WORD = Pattern.compile("^[A-Za-zÀ-ÿ]+$");
@@ -62,11 +62,11 @@ public class RegistrationPetService {
 
     public String validateHouseNumber(String houseNumber) {
         if (houseNumber.isBlank()) {
-            return RegistrationConstants.NAO_INFORMADO;
+            return PetConstants.NAO_INFORMADO;
         }
 
         String regexNumberHouse = "^[0-9]{1,5}$";
-        if (!Pattern.matches(regexNumberHouse, houseNumber) && !houseNumber.equals(RegistrationConstants.NAO_INFORMADO)) {
+        if (!Pattern.matches(regexNumberHouse, houseNumber) && !houseNumber.equals(PetConstants.NAO_INFORMADO)) {
             throw new ResponseFormException("Entrada inválida: Digite um número de até 5 dígitos.");
         }
 
@@ -125,7 +125,7 @@ public class RegistrationPetService {
     public String validateAge(String age) {
         if (age == null || age.isBlank()) {
 
-            return RegistrationConstants.NAO_INFORMADO;
+            return PetConstants.NAO_INFORMADO;
         }
 
         String regex = "^[0-9]{1,2}([.,][0-9])?$";
@@ -133,7 +133,7 @@ public class RegistrationPetService {
         Pattern pattern = Pattern.compile(regex);
         boolean valid = pattern.matcher(age).matches();
 
-        if (!valid && !age.equals(RegistrationConstants.NAO_INFORMADO)) {
+        if (!valid && !age.equals(PetConstants.NAO_INFORMADO)) {
             throw new ResponseFormException(
                     "Entrada inválida: informe apenas números representando a idade em anos. " +
                             "Use 1 ou 2 dígitos, com opção de 1 casa decimal. " +
@@ -145,7 +145,7 @@ public class RegistrationPetService {
 
     public String validateWeight(String weight) {
         if (weight == null || weight.isBlank()) {
-            return RegistrationConstants.NAO_INFORMADO;
+            return PetConstants.NAO_INFORMADO;
         }
 
         String regex = "^(\\d{1,2}|60)([.,]\\d{1,2})?$";
@@ -171,14 +171,14 @@ public class RegistrationPetService {
 
     public String validateBreed(String breed){
         if (breed == null || breed.isBlank()) {
-            return RegistrationConstants.NAO_INFORMADO;
+            return PetConstants.NAO_INFORMADO;
         }
 
         String regex = "^[A-Za-zÀ-ÿ ]+$";
         Pattern pattern = Pattern.compile(regex);
         boolean valid = pattern.matcher(breed).matches();
 
-        if (!valid && !breed.equals(RegistrationConstants.NAO_INFORMADO)) {
+        if (!valid && !breed.equals(PetConstants.NAO_INFORMADO)) {
             throw new ResponseFormException("Entrada inválida: Digite a raça correta do seu pet.");
         }
         return breed;

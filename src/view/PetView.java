@@ -3,7 +3,7 @@ package src.view;
 import java.util.List;
 import java.util.Scanner;
 
-public class RegistrationPetView {
+public class PetView {
     Scanner scannerResponseUser = new Scanner(System.in);
 
     public void readerLineForm(String linesForm){
