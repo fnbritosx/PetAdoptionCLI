@@ -1,7 +1,7 @@
 package src.model.service;
 
 
-import exception.MenuNumberException;
+import src.model.exception.MenuNumberException;
 
 public class MenuService {
 

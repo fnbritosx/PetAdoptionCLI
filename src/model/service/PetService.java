@@ -1,6 +1,6 @@
 package src.model.service;
 
-import exception.ResponseFormException;
+import src.model.exception.ResponseFormException;
 import src.model.entity.PetConstants;
 import src.model.entity.PetSex;
 import src.model.entity.PetType;
@@ -10,8 +10,7 @@ import java.util.regex.Pattern;
 public class PetService {
 
     public String validateName(String nameInput) {
-
-        if (nameInput == null|| nameInput.isBlank()) {
+        if (nameInput == null || nameInput.isBlank()) {
             return PetConstants.NAO_INFORMADO;
         }
 
@@ -44,6 +43,7 @@ public class PetService {
         return nameInput;
     }
 
+
     public PetType validateType(String typeInput) {
         try {
             return PetType.valueOf(typeInput.trim().toUpperCase());
@@ -72,6 +72,7 @@ public class PetService {
 
         return houseNumber;
     }
+
 
     public String validateCity(String city) {
         if (city == null || city.isBlank()) {
@@ -124,7 +125,6 @@ public class PetService {
 
     public String validateAge(String age) {
         if (age == null || age.isBlank()) {
-
             return PetConstants.NAO_INFORMADO;
         }
 
@@ -142,6 +142,7 @@ public class PetService {
         }
         return age + " anos";
     }
+
 
     public String validateWeight(String weight) {
         if (weight == null || weight.isBlank()) {
@@ -163,13 +164,11 @@ public class PetService {
         if (value < 0.5 || value > 60) {
             throw new ResponseFormException("Peso deve estar entre 0.5 e 60 kg.");
         }
-
         return weight + " kg";
     }
 
 
-
-    public String validateBreed(String breed){
+    public String validateBreed(String breed) {
         if (breed == null || breed.isBlank()) {
             return PetConstants.NAO_INFORMADO;
         }

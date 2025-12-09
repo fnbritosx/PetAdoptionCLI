@@ -18,10 +18,10 @@ public class Pet {
 
     @Override
     public String toString() {
-        return  "1 - " + name +  "\n" +
+        return "1 - " + name + "\n" +
                 "2 - " + type.getFormatted() + "\n" +
                 "3 - " + sex.getFormatted() + "\n" +
-                "5 - " + street +", " + houseNumber + ", " + city + "\n" +
+                "5 - " + street + ", " + houseNumber + ", " + city + "\n" +
                 "6 - " + age + "\n" +
                 "7 - " + weight + "\n" +
                 "8 - " + breed + "\n";

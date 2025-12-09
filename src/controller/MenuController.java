@@ -1,6 +1,6 @@
 package src.controller;
 
-import exception.MenuNumberException;
+import src.model.exception.MenuNumberException;
 import src.model.service.MenuService;
 import src.view.MenuView;
 

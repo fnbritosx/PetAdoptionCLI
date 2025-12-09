@@ -1,6 +1,6 @@
 package src.controller;
 
-import exception.ResponseFormException;
+import src.model.exception.ResponseFormException;
 import src.model.entity.Pet;
 import src.model.repository.PetRepository;
 import src.model.service.PetService;
@@ -17,12 +17,14 @@ public class PetController {
     private final PetRepository petRepository;
     private final Pet pet;
 
+
     public PetController() {
         this.petService = new PetService();
         this.petView = new PetView();
         this.petRepository = new PetRepository();
         this.pet = new Pet();
     }
+
 
     private List<String> askAddress() {
         List<String> responses = new ArrayList<>();
@@ -57,7 +59,8 @@ public class PetController {
         return responses;
     }
 
-    private void handleQuestion(int count) throws ResponseFormException, IOException {
+
+    private void handleQuestion(int count) throws ResponseFormException {
         String response;
         switch (count) {
             case 0:
@@ -93,11 +96,11 @@ public class PetController {
         }
     }
 
+
     public void start() throws IOException {
         int count = 0;
 
         for (String line : petRepository.getQuestionsForm()) {
-
             while (true) {
                 petView.readerLineForm(line);
                 try {
@@ -111,9 +114,7 @@ public class PetController {
         }
         petRepository.savePet(pet);
 
-        petRepository.createdFile(pet.getName());
-
-        System.out.println(pet);
+        petRepository.writePetToFile(petRepository.createdFile(pet.getName()), pet.toString());
     }
 }
 
