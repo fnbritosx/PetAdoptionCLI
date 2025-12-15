@@ -1,10 +1,10 @@
-package src.main;
+package main;
 
-import src.controller.MenuController;
+import controller.MenuController;
 
 public class Main {
     public static void main(String[] args) {
-        MenuController menuController= new MenuController();
+        MenuController menuController = new MenuController();
         menuController.start();
     }
 }

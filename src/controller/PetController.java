@@ -1,10 +1,10 @@
-package src.controller;
+package controller;
 
-import src.model.exception.ResponseFormException;
-import src.model.entity.Pet;
-import src.model.repository.PetRepository;
-import src.model.service.PetService;
-import src.view.PetView;
+import model.exception.ResponseFormException;
+import model.entity.Pet;
+import model.repository.PetRepository;
+import model.service.PetService;
+import view.PetView;
 
 import java.io.IOException;
 import java.util.ArrayList;

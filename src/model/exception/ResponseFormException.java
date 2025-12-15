@@ -1,4 +1,4 @@
-package src.model.exception;
+package model.exception;
 
 public class ResponseFormException extends RuntimeException {
     public ResponseFormException(String message) {

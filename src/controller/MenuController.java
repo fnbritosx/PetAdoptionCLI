@@ -1,8 +1,8 @@
-package src.controller;
+package controller;
 
-import src.model.exception.MenuNumberException;
-import src.model.service.MenuService;
-import src.view.MenuView;
+import model.exception.MenuNumberException;
+import model.service.MenuService;
+import view.MenuView;
 
 import java.io.IOException;
 
@@ -10,11 +10,13 @@ public class MenuController {
     private final MenuView menuView;
     private final MenuService menuService;
     private final PetController petController;
+    private final SearchPetController searchPetController;
 
     public MenuController() {
         this.menuView = new MenuView();
         this.menuService = new MenuService();
         this.petController = new PetController();
+        this.searchPetController = new SearchPetController();
     }
 
     public void start() {
@@ -35,6 +37,7 @@ public class MenuController {
                     case 4:
                         break;
                     case 5:
+                        searchPetController.start();
                         break;
                     case 6:
                         System.out.println("Encerrando o programa...");

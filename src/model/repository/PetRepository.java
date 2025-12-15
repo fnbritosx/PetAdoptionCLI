@@ -1,6 +1,6 @@
-package src.model.repository;
+package model.repository;
 
-import src.model.entity.Pet;
+import model.entity.Pet;
 
 import java.io.File;
 import java.io.FileWriter;

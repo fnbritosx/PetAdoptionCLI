@@ -1,4 +1,4 @@
-package src.model.exception;
+package model.exception;
 
 public class MenuNumberException extends RuntimeException {
     public MenuNumberException(String message) {
