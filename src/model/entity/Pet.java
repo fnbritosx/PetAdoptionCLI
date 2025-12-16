@@ -27,6 +27,11 @@ public class Pet {
                 "8 - " + breed + "\n";
     }
 
+    public String formattedPets(){
+        return name + " - " + type.getFormatted() + " - " +  sex.getFormatted() +
+                " - " + street + ", " + houseNumber + " - " + city + " - " + age + " - " + weight + " - " + breed;
+    }
+
     public String getName() {
         return name;
     }
