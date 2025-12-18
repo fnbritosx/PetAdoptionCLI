@@ -1,8 +1,6 @@
 package model.repository;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,6 +15,10 @@ public class PetRepository {
 
     public List<String> getQuestionsForm() throws IOException {
         return Files.readAllLines(pathForm.toPath());
+    }
+
+    public File getPathAllPets(){
+        return fileAllPets;
     }
 
     public File createdFile(String petName) {

@@ -14,10 +14,21 @@ public class SearchPetController {
     }
 
     public void start() {
+        String criteria;
+        int criteriaInt;
 
         while (true) {
             try {
-                service.validateType(view.animalType());
+                criteria = service.validateType(view.animalType());
+                criteriaInt = Integer.parseInt(criteria);
+
+                switch (criteriaInt){
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
+
                 break;
             } catch (SearchPetException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
