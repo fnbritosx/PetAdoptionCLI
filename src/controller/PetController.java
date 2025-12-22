@@ -113,8 +113,8 @@ public class PetController {
             count++;
         }
 
-        petRepository.writePetToFile(petRepository.createdFile(pet.getName()), pet.toString());
-        petRepository.writeAllPetToFile(pet.formattedPets());
+        petRepository.writePetToFile(petRepository.createdFile(pet.getName()), pet.formatedPets());
+        petRepository.writeAllPetToFile(pet.formattedAllPets());
     }
 }
 

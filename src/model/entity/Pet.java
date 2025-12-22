@@ -16,8 +16,7 @@ public class Pet {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
+    public String formatedPets() {
         return "1 - " + name + "\n" +
                 "2 - " + type.getFormatted() + "\n" +
                 "3 - " + sex.getFormatted() + "\n" +
@@ -27,7 +26,7 @@ public class Pet {
                 "8 - " + breed + "\n";
     }
 
-    public String formattedPets(){
+    public String formattedAllPets(){
         return name + " - " + type.getFormatted() + " - " +  sex.getFormatted() +
                 " - " + street + ", " + houseNumber + " - " + city + " - " + age + " - " + weight + " - " + breed;
     }

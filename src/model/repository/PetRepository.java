@@ -1,9 +1,14 @@
 package model.repository;
 
+import model.entity.Pet;
+import model.entity.PetSex;
+import model.entity.PetType;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -73,6 +78,35 @@ public class PetRepository {
         } catch (IOException e) {
             throw new RuntimeException("Erro ao escrever no arquivo " + dirAllPets.getAbsolutePath(), e);
         }
+    }
+
+    public List<Pet> getAllPets() throws IOException {
+        List<String> reader = Files.readAllLines(fileAllPets.toPath());
+        List<Pet> pets = new ArrayList<>();
+
+
+        for (String line : reader){
+            Pet pet = new Pet();
+            String[] fields = line.split(" - ");
+
+            pet.setName(fields[1]);
+            pet.setType(PetType.valueOf(fields[2]));
+            pet.setSex(PetSex.valueOf(fields[3]));
+
+            if(fields[4] != null){
+                String[] fieldFour = fields[4].split(",");
+                pet.setStreet(fieldFour[0]);
+                pet.setHouseNumber(fieldFour[1]);
+            }
+
+            pet.setCity(fields[5]);
+            pet.setAge(fields[6]);
+            pet.setWeight(fields[7]);
+            pet.setBreed(fields[8]);
+
+            pets.add(pet);
+        }
+        return pets;
     }
 }
 
