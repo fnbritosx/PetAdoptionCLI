@@ -7,7 +7,8 @@ import java.util.Scanner;
 public class SearchPetView {
     private final Scanner scanner;
     private final Map<Integer, String> hashMapType = new HashMap<>();
-    private final Map<Integer, String> hashMapCriteria = new HashMap<>();
+    public final Map<Integer, String> hashMapCriteria = new HashMap<>();
+    private final Map<Integer, String> hashMapProceedCriteria = new HashMap<>();
 
     public SearchPetView() {
         this.scanner = new Scanner(System.in);
@@ -22,12 +23,14 @@ public class SearchPetView {
         hashMapCriteria.put(5, "Raça");
         hashMapCriteria.put(6, "Endereço");
 
+        hashMapProceedCriteria.put(1, "Sim");
+        hashMapProceedCriteria.put(2, "Não");
+
     }
 
 
     public String menuType() {
         System.out.println("Escolha o tipo de animal");
-
         for (Map.Entry<Integer, String> entry : hashMapType.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
@@ -39,7 +42,6 @@ public class SearchPetView {
 
     public String menuCriteria() {
         System.out.println("Escolha o primeiro critério de busca");
-
         for (Map.Entry<Integer, String> entry : hashMapCriteria.entrySet()) {
             System.out.println(entry.getKey() + " - " + entry.getValue());
         }
@@ -51,12 +53,15 @@ public class SearchPetView {
 
     public String proceedCriterion() {
         System.out.println("Deseja selecionar mais um critério?");
-        System.out.println("1 - SIM");
-        System.out.println("2 - NÃO");
+        for (Map.Entry<Integer, String> proceedCriterion : hashMapProceedCriteria.entrySet()) {
+            System.out.println(proceedCriterion.getKey() + " - " + proceedCriterion.getValue());
+        }
 
         System.out.print("R: ");
+        String response = scanner.nextLine();
 
-        return scanner.nextLine();
+        int responseInt = Integer.parseInt(response);
+        return hashMapProceedCriteria.get(responseInt).toLowerCase();
     }
 
 
@@ -64,7 +69,6 @@ public class SearchPetView {
         System.out.println("Escolha um novo critério");
 
         int choiceFirstCriteria = Integer.parseInt(responseFirstCriteria);
-
         hashMapCriteria.remove(choiceFirstCriteria);
 
         for (int key : hashMapCriteria.keySet()) {
@@ -72,7 +76,18 @@ public class SearchPetView {
         }
 
         System.out.print("R: ");
-
         return scanner.nextLine();
+    }
+
+
+    public String getQuestionOne(String response) {
+        int responseInt = Integer.parseInt(response);
+        return hashMapCriteria.get(responseInt);
+    }
+
+
+    public String getQuestionTwo(String response) {
+        int responseInt = Integer.parseInt(response);
+        return hashMapCriteria.get(responseInt);
     }
 }

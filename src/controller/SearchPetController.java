@@ -16,7 +16,26 @@ public class SearchPetController {
     }
 
     public void start() {
+        String responseMenuType = view.menuType();
+        service.validateType(responseMenuType);
 
+        String responseMenuCriteria = view.menuCriteria();
+        service.validateCriteria(responseMenuCriteria);
+
+        String responseProceedCriterion = view.proceedCriterion();
+        service.validateProceed(responseProceedCriterion);
+
+        String responseNewMenuCriteria = null;
+        if (responseProceedCriterion.equals("sim")) {
+            responseNewMenuCriteria = view.newMenuCriteria(responseMenuCriteria);
+            service.validateNewMenuCriteria(responseNewMenuCriteria, responseMenuCriteria);
+        }
+
+        view.getQuestionOne(responseMenuCriteria);
+
+        if (responseProceedCriterion.equals("sim")) {
+            view.getQuestionTwo(responseNewMenuCriteria);
+        }
     }
 }
 

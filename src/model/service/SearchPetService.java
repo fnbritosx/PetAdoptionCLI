@@ -2,33 +2,47 @@ package model.service;
 
 import model.exception.SearchPetException;
 
-import java.io.*;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class SearchPetService {
 
-    public String validateType(String response){
+    public String validateType(String response) {
         Pattern pattern = Pattern.compile("^[12]$");
 
-        if (!pattern.matcher(response).matches()){
+        if (!pattern.matcher(response).matches()) {
             throw new SearchPetException("Entrada inválida: digite 1 ou 2.");
         }
         return response;
     }
 
-    public void validateCriteria(String response){
+
+    public void validateCriteria(String response) {
         Pattern pattern = Pattern.compile("^[1-6]$");
 
-        if (!pattern.matcher(response).matches()){
+        if (!pattern.matcher(response).matches()) {
             throw new SearchPetException("Entrada inválida: digite um número de 1 a 6.");
         }
     }
 
-    public void validateProceed(String response){
+
+    public void validateProceed(String response) {
         Pattern pattern = Pattern.compile("^[12]$");
 
-        if (!pattern.matcher(response).matches()){
+        if (!pattern.matcher(response).matches()) {
             throw new SearchPetException("Entrada inválida: digite 1 ou 2.");
+        }
+    }
+
+
+    public void validateNewMenuCriteria(String response, String previousCriterAnswer) {
+        Pattern pattern = Pattern.compile("^[1-6]$");
+        if (!pattern.matcher(response).matches()) {
+            throw new SearchPetException("Entrada inválida: digite um número de 1 a 6.");
+        }
+
+        if (response.equals(previousCriterAnswer)) {
+            throw new SearchPetException("Entrada inválida: digite um valor diferente de um já escolhido.");
         }
     }
 }
