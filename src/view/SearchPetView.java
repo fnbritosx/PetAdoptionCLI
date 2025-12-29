@@ -68,10 +68,12 @@ public class SearchPetView {
     public String newMenuCriteria(String responseFirstCriteria) {
         System.out.println("Escolha um novo critério");
 
-        int choiceFirstCriteria = Integer.parseInt(responseFirstCriteria);
-        hashMapCriteria.remove(choiceFirstCriteria);
+        Map<Integer, String> criteriaCopy = new HashMap<>(hashMapCriteria);
 
-        for (int key : hashMapCriteria.keySet()) {
+        int choiceFirstCriteria = Integer.parseInt(responseFirstCriteria);
+        criteriaCopy.remove(choiceFirstCriteria);
+
+        for (int key : criteriaCopy.keySet()) {
             System.out.println(key + " - " + hashMapCriteria.get(key));
         }
 
@@ -88,6 +90,8 @@ public class SearchPetView {
 
     public String getQuestionTwo(String response) {
         int responseInt = Integer.parseInt(response);
-        return hashMapCriteria.get(responseInt);
+        System.out.print(hashMapCriteria.get(responseInt) + ": ");
+
+        return scanner.nextLine();
     }
 }

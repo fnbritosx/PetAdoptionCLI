@@ -52,7 +52,8 @@ public class PetController {
                     break;
 
                 } catch (ResponseFormException e) {
-                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+
+                    printError(e);
                 }
             }
         }
@@ -107,7 +108,7 @@ public class PetController {
                     handleQuestion(count);
                     break;
                 } catch (ResponseFormException e) {
-                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                   printError(e);
                 }
             }
             count++;
@@ -115,6 +116,10 @@ public class PetController {
 
         petRepository.writePetToFile(petRepository.createdFile(pet.getName()), pet.formatedPets());
         petRepository.writeAllPetToFile(pet.formattedAllPets());
+    }
+
+    private void printError(ResponseFormException e) {
+        System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
     }
 }
 

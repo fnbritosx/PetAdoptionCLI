@@ -5,9 +5,33 @@ import model.entity.PetConstants;
 import model.entity.PetSex;
 import model.entity.PetType;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class PetService {
+
+    public void validateQuestions(String numberQuestion, String response) {
+        int criteriaCode = Integer.parseInt(numberQuestion);
+
+        switch (criteriaCode) {
+            case 1:
+                validateName(response);
+                break;
+            case 2:
+                validateSex(response);
+                break;
+            case 3:
+                validateAge(response);
+                break;
+            case 4:
+                validateWeight(response);
+            case 5:
+                validateBreed(response);
+            case 6:
+
+        }
+
+    }
 
     public String validateName(String nameInput) {
         if (nameInput == null || nameInput.isBlank()) {
