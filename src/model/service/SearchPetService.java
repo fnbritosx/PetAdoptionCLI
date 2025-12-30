@@ -44,4 +44,11 @@ public class SearchPetService {
             throw new SearchPetException("Entrada inválida: digite um valor diferente de um já escolhido.");
         }
     }
+    public void validateAddress(String responseAddress){
+        Pattern pattern = Pattern.compile("^[1-3]$");
+
+        if (!pattern.matcher(responseAddress).matches()){
+            throw new SearchPetException("Entrada inválida: digite um número de 1 a 3.");
+        }
+    }
 }

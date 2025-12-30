@@ -1,20 +1,24 @@
 package controller;
 
+import model.exception.ResponseFormException;
 import model.exception.SearchPetException;
 import model.repository.PetRepository;
+import model.service.PetService;
 import model.service.SearchPetService;
 import view.SearchPetView;
 
 public class SearchPetController {
 
     private final SearchPetView view;
-    private final SearchPetService service;
+    private final SearchPetService searchService;
+    private final PetService petService;
     private final PetRepository repository;
 
     public SearchPetController() {
         this.view = new SearchPetView();
-        this.service = new SearchPetService();
+        this.searchService = new SearchPetService();
         this.repository = new PetRepository();
+        this.petService = new PetService();
     }
 
     public void start() {
@@ -23,61 +27,99 @@ public class SearchPetController {
         while (true) {
             try {
                 responseMenuType = view.menuType();
-                service.validateType(responseMenuType);
+                searchService.validateType(responseMenuType);
                 break;
             } catch (SearchPetException e) {
-                printError(e);
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
 
-        String responseMenuCriteria = null;
+
+        String responseMenuCriteria;
         while (true) {
             try {
                 responseMenuCriteria = view.menuCriteria();
-                service.validateCriteria(responseMenuCriteria);
+                searchService.validateCriteria(responseMenuCriteria);
                 break;
             } catch (SearchPetException e) {
-                printError(e);
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
 
-        String responseProceedCriterion = null;
+        String responseAddress = null;
+        if (responseMenuCriteria.equals("6")) {
+            while (true) {
+                try {
+                    responseAddress = view.address();
+                    searchService.validateAddress(responseAddress);
+                    break;
+                } catch (SearchPetException e) {
+                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                }
+            }
+        }
+
+
+        String responseProceedCriterion;
         while (true) {
             try {
                 responseProceedCriterion = view.proceedCriterion();
-                service.validateProceed(responseProceedCriterion);
+                searchService.validateProceed(responseProceedCriterion);
                 break;
             } catch (SearchPetException e) {
-                printError(e);
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
+
 
         String responseNewMenuCriteria = null;
         if (responseProceedCriterion.equals("sim")) {
             while (true) {
                 try {
                     responseNewMenuCriteria = view.newMenuCriteria(responseMenuCriteria);
-                    service.validateNewMenuCriteria(
-                            responseNewMenuCriteria,
-                            responseMenuCriteria
-                    );
+                    searchService.validateNewMenuCriteria(responseNewMenuCriteria, responseMenuCriteria);
                     break;
                 } catch (SearchPetException e) {
-                    printError(e);
+                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
                 }
             }
         }
 
-        String responseOne = view.getQuestionOne(responseMenuCriteria);
-
-        String responseTwo = null;
-        if (responseNewMenuCriteria != null) {
-            responseTwo = view.getQuestionTwo(responseNewMenuCriteria);
+        if (responseProceedCriterion.equals("sim") && responseNewMenuCriteria.equals("6")) {
+            while (true) {
+                try {
+                    responseAddress = view.address();
+                    searchService.validateAddress(responseAddress);
+                    break;
+                } catch (SearchPetException e) {
+                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                }
+            }
         }
 
-    }
 
-    private void printError(SearchPetException e) {
-        System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+        while (true) {
+            try {
+                String responseOne = view.getQuestionOne(responseMenuCriteria, responseAddress);
+                petService.validateQuestions(responseMenuCriteria, responseOne, responseAddress);
+                break;
+            } catch (ResponseFormException e) {
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+            }
+        }
+
+
+        String responseTwo;
+        if (responseNewMenuCriteria != null) {
+            while (true) {
+                try {
+                    responseTwo = view.getQuestionTwo(responseNewMenuCriteria, responseMenuCriteria);
+                    petService.validateQuestions(responseNewMenuCriteria, responseTwo, responseAddress);
+                    break;
+                } catch (ResponseFormException e) {
+                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                }
+            }
+        }
     }
 }

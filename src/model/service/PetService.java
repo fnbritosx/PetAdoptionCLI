@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class PetService {
 
-    public void validateQuestions(String numberQuestion, String response) {
+    public void validateQuestions(String numberQuestion, String response, String subAddress) {
         int criteriaCode = Integer.parseInt(numberQuestion);
 
         switch (criteriaCode) {
@@ -28,7 +28,15 @@ public class PetService {
             case 5:
                 validateBreed(response);
             case 6:
-
+                if (subAddress.equals("1")){
+                    validateRoad(response);
+                }
+                if (subAddress.equals("2")){
+                    validateHouseNumber(response);
+                }
+                if (subAddress.equals("3")){
+                    validateCity(response);
+                }
         }
 
     }

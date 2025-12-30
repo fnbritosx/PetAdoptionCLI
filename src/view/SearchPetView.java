@@ -9,6 +9,7 @@ public class SearchPetView {
     private final Map<Integer, String> hashMapType = new HashMap<>();
     public final Map<Integer, String> hashMapCriteria = new HashMap<>();
     private final Map<Integer, String> hashMapProceedCriteria = new HashMap<>();
+    private final Map<Integer, String> mapAddress = new HashMap<>();
 
     public SearchPetView() {
         this.scanner = new Scanner(System.in);
@@ -25,6 +26,10 @@ public class SearchPetView {
 
         hashMapProceedCriteria.put(1, "Sim");
         hashMapProceedCriteria.put(2, "Não");
+
+        mapAddress.put(1, "Rua");
+        mapAddress.put(2, "Número");
+        mapAddress.put(3, "Cidade");
 
     }
 
@@ -82,15 +87,45 @@ public class SearchPetView {
     }
 
 
-    public String getQuestionOne(String response) {
+    public String getQuestionOne(String response, String numberAddress) {
         int responseInt = Integer.parseInt(response);
-        return hashMapCriteria.get(responseInt);
+
+        int intNumberAddress = Integer.parseInt(numberAddress);
+
+        String value = mapAddress.get(intNumberAddress);
+
+        if (responseInt == 6){
+        System.out.print(hashMapCriteria.get(responseInt) + " - " + value + ": ");
+        } else {
+            System.out.print(hashMapCriteria.get(responseInt) + ": ");
+        }
+
+        return scanner.nextLine();
     }
 
 
-    public String getQuestionTwo(String response) {
+    public String getQuestionTwo(String response, String numberAddress) {
         int responseInt = Integer.parseInt(response);
-        System.out.print(hashMapCriteria.get(responseInt) + ": ");
+
+        int intNumberAddress = Integer.parseInt(numberAddress);
+
+        String value = mapAddress.get(intNumberAddress);
+
+        if (responseInt == 6){
+            System.out.print(hashMapCriteria.get(responseInt) + " - " + value + ": ");
+        } else {
+            System.out.print(hashMapCriteria.get(responseInt) + ": ");
+        }
+
+        return scanner.nextLine();
+    }
+
+    public String address(){
+        for (Map.Entry<Integer, String> address : mapAddress.entrySet()){
+            System.out.println(address.getKey() + " - " + address.getValue());
+        }
+
+        System.out.print("R: ");
 
         return scanner.nextLine();
     }
