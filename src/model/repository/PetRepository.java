@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class PetRepository {
-    private static final File pathForm = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository\\form\\form.txt");
-    private static final File pathRegisteredPets = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository\\pets");
-    private static final File dirAllPets = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository\\allpets");
+    private static final File pathForm = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\form\\form.txt");
+    private static final File pathRegisteredPets = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\pets");
+    private static final File dirAllPets = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\allpets");
     private static final File fileAllPets = new File(dirAllPets, "allPets.txt");
 
     public List<String> getQuestionsForm() throws IOException {
@@ -80,33 +80,32 @@ public class PetRepository {
         }
     }
 
-    public List<Pet> getAllPets() throws IOException {
-        List<String> reader = Files.readAllLines(fileAllPets.toPath());
-        List<Pet> pets = new ArrayList<>();
+    public Pet getAllPets(String line) {
 
+        String withoutNumber = line.substring(line.indexOf(" - ") + 3);
+        String[] fields = withoutNumber.split(" - ");
 
-        for (String line : reader){
-            Pet pet = new Pet();
-            String[] fields = line.split(" - ");
+        Pet pet = new Pet();
 
-            pet.setName(fields[1]);
-            pet.setType(PetType.valueOf(fields[2]));
-            pet.setSex(PetSex.valueOf(fields[3]));
+        pet.setName(fields[0]);
+        pet.setType(PetType.valueOf(fields[1].toUpperCase()));
+        pet.setSex(PetSex.valueOf(fields[2].toUpperCase()));
 
-            if(fields[4] != null){
-                String[] fieldFour = fields[4].split(",");
-                pet.setStreet(fieldFour[0]);
-                pet.setHouseNumber(fieldFour[1]);
-            }
+        String address = fields[3];
+        int commaPosition = address.indexOf(",");
 
-            pet.setCity(fields[5]);
-            pet.setAge(fields[6]);
-            pet.setWeight(fields[7]);
-            pet.setBreed(fields[8]);
+        String street = address.substring(0, commaPosition).trim();
+        pet.setStreet(street);
 
-            pets.add(pet);
-        }
-        return pets;
+        String houseNumber = address.substring(commaPosition + 1).trim();
+        pet.setHouseNumber(houseNumber);
+
+        pet.setCity(fields[4]);
+        pet.setAge(fields[5]);
+        pet.setWeight(fields[6]);
+        pet.setBreed(fields[7]);
+
+        return pet;
     }
 }
 

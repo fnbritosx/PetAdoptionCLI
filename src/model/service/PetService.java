@@ -5,7 +5,6 @@ import model.entity.PetConstants;
 import model.entity.PetSex;
 import model.entity.PetType;
 
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class PetService {
@@ -15,7 +14,7 @@ public class PetService {
 
         switch (criteriaCode) {
             case 1:
-                validateName(response);
+              validateNameOrLastName(response);
                 break;
             case 2:
                 validateSex(response);
@@ -28,25 +27,49 @@ public class PetService {
             case 5:
                 validateBreed(response);
             case 6:
-                if (subAddress.equals("1")){
+                if (subAddress.equals("1")) {
                     validateRoad(response);
                 }
-                if (subAddress.equals("2")){
+                if (subAddress.equals("2")) {
                     validateHouseNumber(response);
                 }
-                if (subAddress.equals("3")){
+                if (subAddress.equals("3")) {
                     validateCity(response);
                 }
         }
 
     }
 
-    public String validateName(String nameInput) {
+    public String validateNameOrLastName(String response) {
+        if (response == null || response.isBlank()) {
+            return PetConstants.NAO_INFORMADO;
+        }
+
+        Pattern word = Pattern.compile("^[A-Za-zÀ-ÿ]+$");
+
+        String[] responseList = response.split(" ");
+
+
+        for (String content : responseList) {
+            if (!word.matcher(content).matches()) {
+                throw new ResponseFormException("Entrada inválida: somente letras são permitidas.");
+            }
+        }
+
+        if (response.length() < 3 || response.length() > 30){
+            throw new ResponseFormException("Entrada inválida: a resposta é curta ou longa demais.");
+        }
+
+            return response;
+    }
+
+
+    public String validateNameAndLastName(String nameInput) {
         if (nameInput == null || nameInput.isBlank()) {
             return PetConstants.NAO_INFORMADO;
         }
 
-        Pattern WORD = Pattern.compile("^[A-Za-zÀ-ÿ]+$");
+        Pattern word = Pattern.compile("^[A-Za-zÀ-ÿ]+$");
 
         String[] parts = nameInput.split(" ");
         int count = parts.length;
@@ -55,23 +78,15 @@ public class PetService {
             throw new ResponseFormException("Entrada inválida: informe nome e sobrenome.");
         }
 
-        if (count > 3) {
+        if (count > 30) {
             throw new ResponseFormException("Entrada inválida: máximo de 3 palavras.");
         }
 
         for (String p : parts) {
-            if (!WORD.matcher(p).matches()) {
+            if (!word.matcher(p).matches()) {
                 throw new ResponseFormException("Entrada inválida: somente letras são permitidas.");
             }
         }
-
-        if (count == 3) {
-            String middle = parts[1];
-            if (middle.length() > 3) {
-                throw new ResponseFormException("Entrada inválida: o nome do meio deve ter no máximo 3 letras.");
-            }
-        }
-
         return nameInput;
     }
 

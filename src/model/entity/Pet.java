@@ -26,13 +26,9 @@ public class Pet {
                 "8 - " + breed + "\n";
     }
 
-    public String formattedAllPets(){
-        return name + " - " + type.getFormatted() + " - " +  sex.getFormatted() +
+    public String formattedAllPets() {
+        return name + " - " + type.getFormatted() + " - " + sex.getFormatted() +
                 " - " + street + ", " + houseNumber + " - " + city + " - " + age + " - " + weight + " - " + breed;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setType(PetType type) {
@@ -61,6 +57,42 @@ public class Pet {
 
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public PetType getType() {
+        return type;
+    }
+
+    public PetSex getSex() {
+        return sex;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public String getBreed() {
+        return breed;
     }
 
     public void setBreed(String breed) {

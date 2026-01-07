@@ -97,10 +97,10 @@ public class SearchPetController {
             }
         }
 
-
+        String responseOne;
         while (true) {
             try {
-                String responseOne = view.getQuestionOne(responseMenuCriteria, responseAddress);
+                responseOne = view.getQuestion(responseMenuCriteria, responseAddress);
                 petService.validateQuestions(responseMenuCriteria, responseOne, responseAddress);
                 break;
             } catch (ResponseFormException e) {
@@ -113,7 +113,7 @@ public class SearchPetController {
         if (responseNewMenuCriteria != null) {
             while (true) {
                 try {
-                    responseTwo = view.getQuestionTwo(responseNewMenuCriteria, responseMenuCriteria);
+                    responseTwo = view.getQuestion(responseNewMenuCriteria, responseMenuCriteria);
                     petService.validateQuestions(responseNewMenuCriteria, responseTwo, responseAddress);
                     break;
                 } catch (ResponseFormException e) {

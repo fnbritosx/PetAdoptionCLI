@@ -66,7 +66,7 @@ public class PetController {
         switch (count) {
             case 0:
                 response = petView.responseUser();
-                pet.setName(petService.validateName(response));
+                pet.setName(petService.validateNameAndLastName(response));
                 break;
             case 1:
                 response = petView.responseUser();

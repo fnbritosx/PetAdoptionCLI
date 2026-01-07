@@ -87,7 +87,7 @@ public class SearchPetView {
     }
 
 
-    public String getQuestionOne(String response, String numberAddress) {
+    public String getQuestion(String response, String numberAddress) {
         int responseInt = Integer.parseInt(response);
 
         int intNumberAddress = Integer.parseInt(numberAddress);
@@ -103,24 +103,8 @@ public class SearchPetView {
         return scanner.nextLine();
     }
 
-
-    public String getQuestionTwo(String response, String numberAddress) {
-        int responseInt = Integer.parseInt(response);
-
-        int intNumberAddress = Integer.parseInt(numberAddress);
-
-        String value = mapAddress.get(intNumberAddress);
-
-        if (responseInt == 6){
-            System.out.print(hashMapCriteria.get(responseInt) + " - " + value + ": ");
-        } else {
-            System.out.print(hashMapCriteria.get(responseInt) + ": ");
-        }
-
-        return scanner.nextLine();
-    }
-
     public String address(){
+        System.out.println("Digite o subtipo do endereço: ");
         for (Map.Entry<Integer, String> address : mapAddress.entrySet()){
             System.out.println(address.getKey() + " - " + address.getValue());
         }
