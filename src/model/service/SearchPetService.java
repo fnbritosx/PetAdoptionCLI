@@ -180,12 +180,11 @@ public class SearchPetService {
     }
 
 
-    public void validateProceed(String response) {
-        Pattern pattern = Pattern.compile("^(?i)(sim|não)$", Pattern.CASE_INSENSITIVE);
-
-        if (!pattern.matcher(response.trim()).matches()) {
+    public String validateProceed(String response) {
+        if (!response.matches("^\\+?[12]$")) {
             throw new SearchPetException("Entrada inválida: digite 1 ou 2.");
         }
+        return response.equals("1") ? "sim" : "não";
     }
 
 

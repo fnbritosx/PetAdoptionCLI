@@ -27,7 +27,7 @@ public class SearchPetController {
 
     public void start() {
 
-        String responseMenuType = null;
+        String responseMenuType;
         while (true) {
             try {
                 responseMenuType = view.menuType();
@@ -67,13 +67,11 @@ public class SearchPetController {
         String responseProceedCriterion;
         while (true) {
             try {
-                responseProceedCriterion = view.proceedCriterion();
-                searchService.validateProceed(responseProceedCriterion);
+                String response = view.proceedCriterion();
+                responseProceedCriterion = searchService.validateProceed(response);
                 break;
             } catch (SearchPetException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
-            } catch (NumberFormatException e) {
-                System.out.println("\u001B[1m\u001B[31mEntrada inválida: digite 1 ou 2.\u001B[0m");
             }
         }
 

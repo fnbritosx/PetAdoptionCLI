@@ -3,6 +3,7 @@ package view;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.BiConsumer;
 
 public class SearchPetView {
     private final Scanner scanner;
@@ -63,10 +64,8 @@ public class SearchPetView {
         }
 
         System.out.print("R: ");
-        String response = scanner.nextLine();
 
-        int responseInt = Integer.parseInt(response);
-        return hashMapProceedCriteria.get(responseInt).toLowerCase();
+        return scanner.nextLine();
     }
 
 
