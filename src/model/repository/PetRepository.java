@@ -6,6 +6,8 @@ import model.entity.PetType;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -17,14 +19,14 @@ public class PetRepository {
     private static final File pathRegisteredPets = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\pets");
     private static final File dirAllPets = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\allpets");
     private static final File fileAllPets = new File(dirAllPets, "allPets.txt");
+    private static final String dirFilterPet= "C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\petsCadastrados";
+    private static final String fileFilterPet = dirFilterPet + "/pets_filtrados.txt";
+
 
     public List<String> getQuestionsForm() throws IOException {
         return Files.readAllLines(pathForm.toPath());
     }
 
-    public File getPathAllPets(){
-        return fileAllPets;
-    }
 
     public File createdFile(String petName) {
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -106,6 +108,50 @@ public class PetRepository {
         pet.setBreed(fields[7]);
 
         return pet;
+    }
+
+    public List<Pet> getAllPetsFromFile() throws IOException {
+        List<String> lines = Files.readAllLines(fileAllPets.toPath());
+        List<Pet> pets = new ArrayList<>();
+
+        for (String line : lines) {
+            Pet pet = getAllPets(line);
+            pets.add(pet);
+        }
+
+        return pets;
+    }
+
+
+    public void saveFilteredPets(List<Pet> pets) throws IOException {
+
+        File directory = new File(dirFilterPet);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        List<String> lines = new ArrayList<>();
+
+        int counter = 1;
+        for (Pet pet : pets) {
+            String line = counter + " - " + pet.formattedAllPets();
+            lines.add(line);
+            counter++;
+        }
+
+        Path path = Paths.get(fileFilterPet);
+        Files.write(path, lines);
+    }
+
+
+    public void displayFilteredPets() throws IOException {
+        Path path = Paths.get(fileFilterPet);
+        List<String> lines = Files.readAllLines(path);
+
+        System.out.println("\n=== PETS ENCONTRADOS ===\n");
+        for (String line : lines) {
+            System.out.println(line);
+        }
     }
 }
 

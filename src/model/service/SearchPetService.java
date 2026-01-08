@@ -9,6 +9,37 @@ import java.util.regex.Pattern;
 
 public class SearchPetService {
 
+    public List<Pet> filterByCriteria(List<Pet> pets, String criteria, String value, String subAddress) {
+
+        switch (criteria) {
+            case "1":
+                return filterByName(pets, value);
+
+            case "2":
+                return filterBySex(pets, value);
+
+            case "3":
+                return filterByAge(pets, value);
+
+            case "4":
+                return filterByWeight(pets, value);
+
+            case "5":
+                return filterByBreed(pets, value);
+
+            case "6":
+                switch (subAddress) {
+                    case "1":
+                        return filterByStreet(pets, value);
+                    case "2":
+                        return filterByHouseNumber(pets, value);
+                    case "3":
+                        return filterByCity(pets, value);
+                }
+        }
+        return pets;
+    }
+
     public List<Pet> filterByName(List<Pet> allPets, String searchName) {
 
         List<Pet> foundPets = new ArrayList<>();
