@@ -9,61 +9,6 @@ import java.util.regex.Pattern;
 
 public class PetService {
 
-    public void validateQuestions(String numberQuestion, String response, String subAddress) {
-        int criteriaCode = Integer.parseInt(numberQuestion);
-
-        switch (criteriaCode) {
-            case 1:
-              validateNameOrLastName(response);
-                break;
-            case 2:
-                validateSex(response);
-                break;
-            case 3:
-                validateAge(response);
-                break;
-            case 4:
-                validateWeight(response);
-            case 5:
-                validateBreed(response);
-            case 6:
-                if (subAddress.equals("1")) {
-                    validateRoad(response);
-                }
-                if (subAddress.equals("2")) {
-                    validateHouseNumber(response);
-                }
-                if (subAddress.equals("3")) {
-                    validateCity(response);
-                }
-        }
-
-    }
-
-    public String validateNameOrLastName(String response) {
-        if (response == null || response.isBlank()) {
-            return PetConstants.NAO_INFORMADO;
-        }
-
-        Pattern word = Pattern.compile("^[A-Za-zÀ-ÿ]+$");
-
-        String[] responseList = response.split(" ");
-
-
-        for (String content : responseList) {
-            if (!word.matcher(content).matches()) {
-                throw new ResponseFormException("Entrada inválida: somente letras são permitidas.");
-            }
-        }
-
-        if (response.length() < 3 || response.length() > 30){
-            throw new ResponseFormException("Entrada inválida: a resposta é curta ou longa demais.");
-        }
-
-            return response;
-    }
-
-
     public String validateNameAndLastName(String nameInput) {
         if (nameInput == null || nameInput.isBlank()) {
             return PetConstants.NAO_INFORMADO;

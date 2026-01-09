@@ -15,14 +15,12 @@ public class SearchPetController {
 
     private final SearchPetView view;
     private final SearchPetService searchService;
-    private final PetService petService;
     private final PetRepository repository;
 
     public SearchPetController() {
         this.view = new SearchPetView();
         this.searchService = new SearchPetService();
         this.repository = new PetRepository();
-        this.petService = new PetService();
     }
 
     public void start() {
@@ -102,11 +100,10 @@ public class SearchPetController {
             }
         }
 
-        String responseOne = null;
+        String responseOne;
         while (true) {
             try {
                 responseOne = view.getQuestion(responseMenuCriteria, responseAddress != null ? responseAddress : "0");
-                petService.validateQuestions(responseMenuCriteria, responseOne, responseAddress != null ? responseAddress : "0");
                 break;
             } catch (ResponseFormException e) {
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
@@ -119,7 +116,6 @@ public class SearchPetController {
             while (true) {
                 try {
                     responseTwo = view.getQuestion(responseNewMenuCriteria, responseNewAddress != null ? responseNewAddress : "0");
-                    petService.validateQuestions(responseNewMenuCriteria, responseTwo, responseNewAddress != null ? responseNewAddress : "0");
                     break;
                 } catch (ResponseFormException e) {
                     System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
