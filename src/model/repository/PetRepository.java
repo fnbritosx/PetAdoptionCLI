@@ -15,16 +15,20 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class PetRepository {
-    private static final File pathForm = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\form\\form.txt");
-    private static final File pathRegisteredPets = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\pets");
-    private static final File dirAllPets = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\allpets");
+    private static final File pathForm = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository\\form\\form.txt");
+    private static final File pathRegisteredPets = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository\\pets");
+    private static final File dirAllPets = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository\\allpets");
     private static final File fileAllPets = new File(dirAllPets, "allPets.txt");
-    private static final String dirFilterPet= "C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\petsCadastrados";
+    private static final String dirFilterPet= "C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository\\petscadastrados";
     private static final String fileFilterPet = dirFilterPet + "/pets_filtrados.txt";
 
 
     public List<String> getQuestionsForm() throws IOException {
         return Files.readAllLines(pathForm.toPath());
+    }
+
+    public List<String> getAllPets() throws IOException {
+        return Files.readAllLines(fileAllPets.toPath());
     }
 
 

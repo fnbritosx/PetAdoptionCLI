@@ -11,12 +11,14 @@ public class MenuController {
     private final MenuService menuService;
     private final PetController petController;
     private final SearchPetController searchPetController;
+    private final AllPetsController allPetsController;
 
     public MenuController() {
         this.menuView = new MenuView();
         this.menuService = new MenuService();
         this.petController = new PetController();
         this.searchPetController = new SearchPetController();
+        this.allPetsController = new AllPetsController();
     }
 
     public void start() {
@@ -35,6 +37,7 @@ public class MenuController {
                     case 3:
                         break;
                     case 4:
+                        allPetsController.start();
                         break;
                     case 5:
                         searchPetController.start();
