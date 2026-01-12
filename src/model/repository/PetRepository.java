@@ -59,6 +59,14 @@ public class PetRepository {
         }
     }
 
+    public void changePet(String newPet){
+        try (FileWriter fileWriter = new FileWriter(fileAllPets)) {
+            fileWriter.write(newPet);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao escrever no arquivo " + e);
+        }
+    }
+
     public void writeAllPetToFile(String response) throws IOException {
 
         if (!dirAllPets.exists()){

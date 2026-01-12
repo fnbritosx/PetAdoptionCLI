@@ -1,6 +1,5 @@
 package controller;
 
-import model.exception.ResponseFormException;
 import model.repository.PetRepository;
 import view.AllPetsView;
 
