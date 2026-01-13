@@ -88,7 +88,7 @@ public class PetService {
     }
 
 
-    public String validateRoad(String road) {
+    public String validateStreet(String road) {
         if (road == null || road.isBlank()) {
             throw new ResponseFormException("O nome da rua não pode estar vazio.");
         }

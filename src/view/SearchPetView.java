@@ -1,12 +1,20 @@
 package view;
 
+import model.repository.PetRepository;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.BiConsumer;
 
 public class SearchPetView {
     private final Scanner scanner;
+    private final PetRepository petRepository;
     private final Map<Integer, String> hashMapType = new HashMap<>();
     public final Map<Integer, String> hashMapCriteria = new HashMap<>();
     private final Map<Integer, String> hashMapProceedCriteria = new HashMap<>();
@@ -14,6 +22,7 @@ public class SearchPetView {
 
     public SearchPetView() {
         this.scanner = new Scanner(System.in);
+        this.petRepository = new PetRepository();
 
         hashMapType.put(1, "Cachorro");
         hashMapType.put(2, "Gato");
@@ -93,8 +102,8 @@ public class SearchPetView {
 
         String value = mapAddress.get(intNumberAddress);
 
-        if (responseInt == 6){
-        System.out.print(hashMapCriteria.get(responseInt) + " - " + value + ": ");
+        if (responseInt == 6) {
+            System.out.print(hashMapCriteria.get(responseInt) + " - " + value + ": ");
         } else {
             System.out.print(hashMapCriteria.get(responseInt) + ": ");
         }
@@ -102,14 +111,24 @@ public class SearchPetView {
         return scanner.nextLine();
     }
 
-    public String address(){
+    public String address() {
         System.out.println("Digite o subtipo do endereço: ");
-        for (Map.Entry<Integer, String> address : mapAddress.entrySet()){
+        for (Map.Entry<Integer, String> address : mapAddress.entrySet()) {
             System.out.println(address.getKey() + " - " + address.getValue());
         }
 
         System.out.print("R: ");
 
         return scanner.nextLine();
+    }
+
+    public void displayFilteredPets() throws IOException {
+        Path path = Paths.get(petRepository.getFilterPet());
+        List<String> lines = Files.readAllLines(path);
+
+        System.out.println("\n=== PETS ENCONTRADOS ===\n");
+        for (String line : lines) {
+            System.out.println(line);
+        }
     }
 }

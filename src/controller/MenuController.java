@@ -28,6 +28,7 @@ public class MenuController {
             try {
                 String response = menuView.menuView();
                 menuService.validateMenuEntry(response);
+                System.out.println();
 
                 int numberResponse = Integer.parseInt(response);
                 switch (numberResponse) {

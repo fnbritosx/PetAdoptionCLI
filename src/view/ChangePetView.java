@@ -27,7 +27,7 @@ public class ChangePetView {
     public String whichPet(){
         System.out.println("Qual pet deseja alterar?");
 
-        System.out.println("R: ");
+        System.out.print("R: ");
         return scanner.nextLine();
     }
 
@@ -39,7 +39,7 @@ public class ChangePetView {
             System.out.println(values.getKey() + " - " + values.getValue());
         }
 
-        System.out.println("R: ");
+        System.out.print("R: ");
         return scanner.nextLine();
     }
 
@@ -47,16 +47,17 @@ public class ChangePetView {
     public String newPetAttribute(String response){
         int numberResponse = Integer.parseInt(response);
 
-        System.out.println(mapAttributes.get(numberResponse) + ": ");
+        System.out.print(mapAttributes.get(numberResponse) + ": ");
         return scanner.nextLine();
     }
 
 
     public String proceedPetAttributes(){
+        System.out.println("Deseja continuar as alterações no pet?");
         System.out.println("1 - Sim");
         System.out.println("2 - Não");
 
-        System.out.println("R: ");
+        System.out.print("R: ");
         return scanner.nextLine();
     }
 }

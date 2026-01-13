@@ -4,7 +4,6 @@ import model.entity.Pet;
 import model.exception.ResponseFormException;
 import model.exception.SearchPetException;
 import model.repository.PetRepository;
-import model.service.PetService;
 import model.service.SearchPetService;
 import view.SearchPetView;
 
@@ -125,7 +124,7 @@ public class SearchPetController {
 
 
         try {
-            List<Pet> allPets = repository.getAllPetsFromFile();
+            List<Pet> allPets = repository.findAll();
 
             String typeFormatted = responseMenuType.equals("1") ? "CACHORRO" : "GATO";
             List<Pet> filteredByType = searchService.filterByType(allPets, typeFormatted);
@@ -153,7 +152,7 @@ public class SearchPetController {
                 repository.saveFilteredPets(result);
                 System.out.println("\n\u001B[1m\u001B[32mArquivo 'pets_filtrados.txt' criado com sucesso!\u001B[0m");
 
-                repository.displayFilteredPets();
+                view.displayFilteredPets();
             }
         } catch (IOException e) {
             System.out.println("\u001B[1m\u001B[31mErro: " + e.getMessage() + "\u001B[0m");

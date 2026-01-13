@@ -41,7 +41,7 @@ public class PetController {
                     }
                     if (question.startsWith("ii.")) {
                         response = petView.responseUser();
-                        response = petService.validateRoad(response);
+                        response = petService.validateStreet(response);
                     }
                     if (question.startsWith("iii.")) {
                         response = petView.responseUser();

@@ -13,4 +13,14 @@ public enum PetType {
     public String getFormatted() {
         return formatted;
     }
+
+    public static PetType fromFormatted(String value) {
+        for (PetType type : values()) {
+            if (type.formatted.equalsIgnoreCase(value)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Tipo inválido: " + value);
+    }
+
 }
