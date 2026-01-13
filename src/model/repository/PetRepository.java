@@ -18,21 +18,25 @@ import java.util.stream.Stream;
 
 public class PetRepository {
 
-    private static final File pathForm = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\form\\form.txt");
+    private static final File pathRepository = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository");
 
-    private static final File pathRegisteredPets = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\pets");
+    private static final File pathForm = new File(pathRepository + "\\form\\form.txt");
 
-    private static final File dirAllPets = new File("C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\allpets");
+    private static final File pathRegisteredPets = new File(pathRepository + "\\pets");
 
-    private static final File fileAllPets = new File(dirAllPets, "allPets.txt");
+    private static final File dirAllPets = new File(pathRepository + "\\allpets");
 
-    private static final String dirFilterPet = "C:\\Users\\febne\\OneDrive\\Documentos\\PetAdoptionCLI\\src\\model\\repository\\petscadastrados";
+    private static final File fileAllPets = new File(dirAllPets + "\\allPets.txt");
 
-    private static final String fileFilterPet = dirFilterPet + "/pets_filtrados.txt";
+    private static final String dirFilterPet = pathRepository + "\\petscadastrados";
+
+    private static final String fileFilterPet = dirFilterPet + "\\pets_filtrados.txt";
+
 
     public List<String> getQuestionsForm() throws IOException {
         return Files.readAllLines(pathForm.toPath());
     }
+
 
     public List<String> getAllPetsLines() {
         try {
@@ -41,6 +45,7 @@ public class PetRepository {
             throw new RuntimeException("Erro ao achar os pets.");
         }
     }
+
 
     public String getFilterPet() {
         return fileFilterPet;
