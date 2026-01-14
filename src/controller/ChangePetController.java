@@ -44,10 +44,10 @@ public class ChangePetController {
 
                 break;
             } catch (IOException e) {
-                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m" + "\n");
+                formattedRed(e.getMessage());
                 return;
             } catch (ChangePetException e) {
-                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m" + "\n");
+                formattedRed(e.getMessage());
             }
         }
 
@@ -71,7 +71,7 @@ public class ChangePetController {
                     System.out.println();
                     break;
                 } catch (ChangePetException e) {
-                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m" + "\n");
+                   formattedRed(e.getMessage());
                 }
             }
 
@@ -101,7 +101,7 @@ public class ChangePetController {
                     }
                     break;
                 } catch (ResponseFormException e) {
-                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m" + "\n");
+                   formattedRed(e.getMessage());
                 }
             }
 
@@ -122,5 +122,9 @@ public class ChangePetController {
             System.out.println("\u001B[31m" + "Antes: " + "\n" + result.getKey() + "\u001B[0m" + "\n");
             System.out.println("\u001B[32m" + "Depois: " + "\n" + result.getValue() + "\u001B[0m" + "\n");
         }
+    }
+
+    private void formattedRed(String e){
+        System.out.println("\u001B[1m\u001B[31m" + e + "\u001B[0m " + "\n");
     }
 }

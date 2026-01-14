@@ -70,12 +70,15 @@ public class SearchPetService {
     }
 
     public List<Pet> filterBySex(List<Pet> allPets, String searchSex) {
+
         List<Pet> foundPets = new ArrayList<>();
 
-        for (Pet pet : allPets) {
-            String petType = pet.getSex().toString();
+        String search = searchSex.trim().toLowerCase();
 
-            if (petType.equalsIgnoreCase(searchSex)) {
+        for (Pet pet : allPets) {
+            String petType = pet.getSex().getFormatted().toLowerCase();
+
+            if (petType.contains(search)) {
                 foundPets.add(pet);
             }
         }
@@ -161,6 +164,7 @@ public class SearchPetService {
         return foundPets;
     }
 
+
     public String validateType(String response) {
         Pattern pattern = Pattern.compile("^[12]$");
 
@@ -199,6 +203,7 @@ public class SearchPetService {
         }
     }
 
+
     public void validateAddress(String responseAddress) {
         Pattern pattern = Pattern.compile("^[1-3]$");
 
@@ -206,4 +211,30 @@ public class SearchPetService {
             throw new SearchPetException("Entrada inválida: digite um número de 1 a 3.");
         }
     }
+
+    public void validateResponse(String numberCriteria, String responseUser){
+        switch (numberCriteria){
+            case "2":
+                validateResponseSex(responseUser);
+                break;
+            case "3":
+                validateResponseAge(responseUser);
+        }
+    }
+
+    public void validateResponseSex(String responseSex) {
+        if (!responseSex.matches("^(macho|femea)$")) {
+            throw new SearchPetException("Digite 'Macho' ou 'Fêmea'.");
+        }
+    }
+
+    public void validateResponseAge(String responseAge) {
+        if (!responseAge.matches("^[0-9]{1,2}([.,][0-9])?$")) {
+            throw new SearchPetException(
+                    "Digite um número entre 0 e 99,9 para representar a idade. " +
+                            "Exemplos: 0,5 = 5 meses; 99,9 = 99 anos e 9 meses."
+            );
+        }
+    }
+
 }

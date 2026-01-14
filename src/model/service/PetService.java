@@ -127,9 +127,7 @@ public class PetService {
 
         if (!valid && !age.equals(PetConstants.NAO_INFORMADO)) {
             throw new ResponseFormException(
-                    "Entrada inválida: informe apenas números representando a idade em anos. " +
-                            "Use 1 ou 2 dígitos, com opção de 1 casa decimal. " +
-                            "Exemplos válidos: 5, 12, 3.5."
+                    "Digite um número entre 0 e 99,9 para representar a idade. Exemplos: 0.5 = 5 meses, 99.9 = 99 anos e 9 meses"
             );
         }
         return age + " anos";

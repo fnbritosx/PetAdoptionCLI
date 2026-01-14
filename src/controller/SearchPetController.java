@@ -1,7 +1,6 @@
 package controller;
 
 import model.entity.Pet;
-import model.exception.ResponseFormException;
 import model.exception.SearchPetException;
 import model.repository.PetRepository;
 import model.service.SearchPetService;
@@ -31,7 +30,7 @@ public class SearchPetController {
                 searchService.validateType(responseMenuType);
                 break;
             } catch (SearchPetException e) {
-                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                formattedRed(e.getMessage());
             }
         }
 
@@ -43,7 +42,7 @@ public class SearchPetController {
                 searchService.validateCriteria(responseMenuCriteria);
                 break;
             } catch (SearchPetException e) {
-                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+               formattedRed(e.getMessage());
             }
         }
 
@@ -55,8 +54,20 @@ public class SearchPetController {
                     searchService.validateAddress(responseAddress);
                     break;
                 } catch (SearchPetException e) {
-                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                    formattedRed(e.getMessage());
                 }
+            }
+        }
+
+        String responseOne;
+        while (true) {
+            try {
+                responseOne = view.getQuestion(responseMenuCriteria, responseAddress != null ? responseAddress : "0");
+                searchService.validateResponse(responseMenuCriteria, responseOne);
+                break;
+            } catch (SearchPetException e) {
+                System.out.println();
+                formattedRed(e.getMessage());
             }
         }
 
@@ -68,7 +79,7 @@ public class SearchPetController {
                 responseProceedCriterion = searchService.validateProceed(response);
                 break;
             } catch (SearchPetException e) {
-                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+               formattedRed(e.getMessage());
             }
         }
 
@@ -82,7 +93,7 @@ public class SearchPetController {
                     searchService.validateNewMenuCriteria(responseNewMenuCriteria, responseMenuCriteria);
                     break;
                 } catch (SearchPetException e) {
-                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                  formattedRed(e.getMessage());
                 }
             }
         }
@@ -94,18 +105,9 @@ public class SearchPetController {
                     searchService.validateAddress(responseNewAddress);
                     break;
                 } catch (SearchPetException e) {
-                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                    System.out.println();
+                    formattedRed(e.getMessage());
                 }
-            }
-        }
-
-        String responseOne;
-        while (true) {
-            try {
-                responseOne = view.getQuestion(responseMenuCriteria, responseAddress != null ? responseAddress : "0");
-                break;
-            } catch (ResponseFormException e) {
-                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
             }
         }
 
@@ -115,9 +117,10 @@ public class SearchPetController {
             while (true) {
                 try {
                     responseTwo = view.getQuestion(responseNewMenuCriteria, responseNewAddress != null ? responseNewAddress : "0");
+                    searchService.validateResponse(responseNewMenuCriteria, responseTwo);
                     break;
-                } catch (ResponseFormException e) {
-                    System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m");
+                } catch (SearchPetException e) {
+                   formattedRed(e.getMessage());
                 }
             }
         }
@@ -147,16 +150,26 @@ public class SearchPetController {
 
 
             if (result.isEmpty()) {
-                System.out.println("\n\u001B[1m\u001B[33mNenhum pet encontrado com os critérios informados.\u001B[0m");
+                System.out.println();
+                formattedRed("Nenhum pet encontrado com os critérios informados.");
             } else {
                 repository.saveFilteredPets(result);
-                System.out.println("\n\u001B[1m\u001B[32mArquivo 'pets_filtrados.txt' criado com sucesso!\u001B[0m");
+                System.out.println();
+                formattedGreen("Arquivo 'pets_filtrados.txt' criado com sucesso!");
 
                 view.displayFilteredPets();
             }
         } catch (IOException e) {
-            System.out.println("\u001B[1m\u001B[31mErro: " + e.getMessage() + "\u001B[0m");
+           formattedRed(e.getMessage());
         }
+    }
+
+    private void formattedRed(String e){
+        System.out.println("\u001B[1m\u001B[31m" + e + "\u001B[0m " + "\n");
+    }
+
+    private void formattedGreen(String e){
+        System.out.println("\u001B[1m\u001B[32m" + e + "\u001B[0m " + "\n");
     }
 }
 

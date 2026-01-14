@@ -18,19 +18,23 @@ import java.util.stream.Stream;
 
 public class PetRepository {
 
-    private static final File pathRepository = new File("C:\\Users\\14994165718\\Documents\\PetAdoptionCLI\\src\\model\\repository");
+    private static final String BASE_PATH = System.getProperty("user.dir");
 
-    private static final File pathForm = new File(pathRepository + "\\form\\form.txt");
+    private static final String DATA_BASE = BASE_PATH + File.separator  + File.separator + "database";
 
-    private static final File pathRegisteredPets = new File(pathRepository + "\\pets");
+    private static final File pathDataBase = new File(DATA_BASE);
 
-    private static final File dirAllPets = new File(pathRepository + "\\allpets");
+    private static final File pathForm = new File(BASE_PATH + File.separator + "src" + File.separator + "model" + File.separator + "repository" + File.separator + "form" + File.separator + "form.txt");
 
-    private static final File fileAllPets = new File(dirAllPets + "\\allPets.txt");
+    private static final File pathRegisteredPets = new File(pathDataBase + File.separator + "pets");
 
-    private static final String dirFilterPet = pathRepository + "\\petscadastrados";
+    private static final File dirAllPets = new File(pathDataBase + File.separator + "allpets");
 
-    private static final String fileFilterPet = dirFilterPet + "\\pets_filtrados.txt";
+    private static final File fileAllPets = new File(dirAllPets + File.separator + "allPets.txt");
+
+    private static final String dirFilterPet = DATA_BASE + File.separator + "registeredpets";
+
+    private static final String fileFilterPet = dirFilterPet + File.separator + "petfilter.txt";
 
 
     public List<String> getQuestionsForm() throws IOException {
@@ -205,5 +209,14 @@ public class PetRepository {
             }
         }
         throw new ChangePetException("Pet não encontrado.");
+    }
+
+
+    public void updateFileAfterDelete(List<String> updatedLines) {
+        try {
+            Files.write(fileAllPets.toPath(), updatedLines);
+        } catch (IOException e) {
+            throw new RuntimeException("Erro ao atualizar o arquivo após deleção.", e);
+        }
     }
 }

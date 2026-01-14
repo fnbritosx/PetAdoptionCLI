@@ -23,4 +23,8 @@ public class PetView {
     public List<String> getSubQuestions(){
         return subQuestions;
     }
+
+    public void registrationCompleted(){
+            System.out.println("\u001B[1m\u001B[32m" + "O cadastro do pet foi realizado!" + "\u001B[0m " + "\n");
+    }
 }

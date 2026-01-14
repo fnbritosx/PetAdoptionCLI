@@ -9,55 +9,90 @@ import java.util.List;
 
 public class DeletePetController {
     private final PetRepository repository;
-    private final DeletePetService service;
     private final DeletePetView view;
+    private final DeletePetService service;
+
 
     public DeletePetController() {
         this.repository = new PetRepository();
-        this.service = new DeletePetService();
         this.view = new DeletePetView();
-    }
-
-    public static void main(String[] args) {
-        DeletePetController deletePetController = new DeletePetController();
-
-        deletePetController.start();
+        this.service = new DeletePetService();
     }
 
     public void start() {
 
         while (true) {
-            for (String line : repository.getAllPetsLines()) {
-                view.readerLine(line);
-            }
+            try {
+                List<String> allLines = repository.getAllPetsLines();
 
-            String lineForDelete = view.askDeleteLine();
-
-            String confirmDeleteLine = "";
-            for (String line : repository.getAllPetsLines()) {
-                if (line.startsWith(lineForDelete + " - ")) {
-                    confirmDeleteLine = view.confirmDeleteLine(line);
+                if (allLines.isEmpty()) {
+                    formattedRed("Não há pets cadastrados.");
+                    return;
                 }
-            }
 
-            if (confirmDeleteLine.equals("2")) {
+                for (String line : allLines) {
+                    view.readerLine(line);
+                }
+
+                String idForDelete = view.askDeleteLine();
                 System.out.println();
 
-
-                continue;
-            }
-
-
-            List<String> newListAllPets = new ArrayList<>();
-
-            for (String line : repository.getAllPetsLines()) {
-                newListAllPets.add(line);
-                if (line.startsWith(lineForDelete + " - ")) {
-                    newListAllPets.remove(line);
+                String selectedLine = null;
+                for (String line : allLines) {
+                    if (line.startsWith(idForDelete + " - ")) {
+                        selectedLine = line;
+                        break;
+                    }
                 }
+
+                if (selectedLine == null) {
+                    formattedRed("ID não encontrado!" + "\n");
+                    continue;
+                }
+
+
+                String confirm = service.validateConfirm(view.confirmDeleteLine(selectedLine));
+
+
+                if (confirm.equals("2")) {
+                    System.out.println();
+                    formattedGreen("Operação cancelada.");
+                    continue;
+                }
+
+                if (confirm.equals("1")) {
+
+                    List<String> newList = new ArrayList<>();
+
+                    int novoId = 1;
+
+                    for (String line : allLines) {
+                        if (!line.startsWith(idForDelete + " - ")) {
+
+                            String datePet = line.substring(line.indexOf(" - ") + 3);
+
+                            newList.add(novoId + " - " + datePet);
+                            novoId++;
+                        }
+                    }
+
+                    repository.updateFileAfterDelete(newList);
+
+                  formattedGreen("Pet deletado com sucesso!");
+                    break;
+                }
+            }catch (Throwable e){
+                System.out.println();
+                System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m " + "\n");
             }
-            System.out.println(newListAllPets);
-            break;
         }
+    }
+
+    private void formattedRed(String e){
+        System.out.println("\u001B[1m\u001B[31m" + e + "\u001B[0m " + "\n");
+    }
+
+    private void formattedGreen(String e){
+        System.out.println("\u001B[1m\u001B[32m" + e + "\u001B[0m " + "\n");
     }
 }

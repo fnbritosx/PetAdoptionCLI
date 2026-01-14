@@ -13,6 +13,7 @@ public class MenuController {
     private final SearchPetController searchPetController;
     private final AllPetsController allPetsController;
     private final ChangePetController changePetController;
+    private final DeletePetController deletePetController;
 
     public MenuController() {
         this.menuView = new MenuView();
@@ -21,6 +22,7 @@ public class MenuController {
         this.searchPetController = new SearchPetController();
         this.allPetsController = new AllPetsController();
         this.changePetController = new ChangePetController();
+        this.deletePetController = new DeletePetController();
     }
 
     public void start() {
@@ -39,6 +41,7 @@ public class MenuController {
                         changePetController.start();
                         break;
                     case 3:
+                        deletePetController.start();
                         break;
                     case 4:
                         allPetsController.start();
