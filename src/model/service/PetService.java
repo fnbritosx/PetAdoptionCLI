@@ -120,14 +120,14 @@ public class PetService {
             return PetConstants.NAO_INFORMADO;
         }
 
-        String regex = "^[0-9]{1,2}([.,][0-9])?$";
+        String regex = "^([0-9]|1[0-9]|20)([.,][0-9])?$";
 
         Pattern pattern = Pattern.compile(regex);
         boolean valid = pattern.matcher(age).matches();
 
         if (!valid && !age.equals(PetConstants.NAO_INFORMADO)) {
             throw new ResponseFormException(
-                    "Digite um número entre 0 e 99,9 para representar a idade. Exemplos: 0.5 = 5 meses, 99.9 = 99 anos e 9 meses"
+                    "Digite um número entre 0.1 e 20 para representar a idade. Obs: qualquer número decimal representa os meses."
             );
         }
         return age + " anos";

@@ -1,0 +1,7 @@
+1 - Não Informado
+2 - Cachorro
+3 - Macho
+5 - Rua miltan, 40, saquarema
+6 - 50 anos
+7 - 30 kg
+8 - pitbull
