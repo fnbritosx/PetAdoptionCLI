@@ -1,7 +1,7 @@
 package controller;
 
-import model.exception.ResponseFormException;
 import model.entity.Pet;
+import model.exception.ResponseFormException;
 import model.repository.PetRepository;
 import model.service.PetService;
 import view.PetView;
@@ -108,7 +108,7 @@ public class PetController {
                     handleQuestion(count);
                     break;
                 } catch (ResponseFormException e) {
-                   formattedRed(e);
+                    formattedRed(e);
                 }
             }
             count++;

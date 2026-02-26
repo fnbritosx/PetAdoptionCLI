@@ -5,7 +5,9 @@ import model.entity.PetSex;
 import model.entity.PetType;
 import model.exception.ChangePetException;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,21 +21,13 @@ import java.util.stream.Stream;
 public class PetRepository {
 
     private static final String BASE_PATH = System.getProperty("user.dir");
-
-    private static final String DATA_BASE = BASE_PATH + File.separator  + File.separator + "database";
-
+    private static final String DATA_BASE = BASE_PATH + File.separator + File.separator + "database";
     private static final File pathDataBase = new File(DATA_BASE);
-
     private static final File pathForm = new File(BASE_PATH + File.separator + "src" + File.separator + "model" + File.separator + "repository" + File.separator + "form" + File.separator + "form.txt");
-
     private static final File pathRegisteredPets = new File(pathDataBase + File.separator + "pets");
-
     private static final File dirAllPets = new File(pathDataBase + File.separator + "allpets");
-
     private static final File fileAllPets = new File(dirAllPets + File.separator + "allPets.txt");
-
     private static final String dirFilterPet = DATA_BASE + File.separator + "registeredpets";
-
     private static final String fileFilterPet = dirFilterPet + File.separator + "petfilter.txt";
 
 

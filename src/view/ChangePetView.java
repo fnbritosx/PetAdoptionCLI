@@ -6,9 +6,9 @@ import java.util.Scanner;
 
 public class ChangePetView {
     Scanner scanner;
-    private final HashMap<Integer, String > mapAttributes = new HashMap<>();
+    private final HashMap<Integer, String> mapAttributes = new HashMap<>();
 
-    public ChangePetView(){
+    public ChangePetView() {
         scanner = new Scanner(System.in);
 
         mapAttributes.put(1, "Nome");
@@ -24,7 +24,7 @@ public class ChangePetView {
         System.out.println(linesForm);
     }
 
-    public String whichPet(){
+    public String whichPet() {
         System.out.println("Qual pet deseja alterar?");
 
         System.out.print("R: ");
@@ -32,10 +32,10 @@ public class ChangePetView {
     }
 
 
-    public String petAttributes(){
+    public String petAttributes() {
         System.out.println("Qual atributo do pet deseja alterar?");
 
-        for (Map.Entry<Integer, String> values : mapAttributes.entrySet()){
+        for (Map.Entry<Integer, String> values : mapAttributes.entrySet()) {
             System.out.println(values.getKey() + " - " + values.getValue());
         }
 
@@ -44,7 +44,7 @@ public class ChangePetView {
     }
 
 
-    public String newPetAttribute(String response){
+    public String newPetAttribute(String response) {
         int numberResponse = Integer.parseInt(response);
 
         System.out.print(mapAttributes.get(numberResponse) + ": ");
@@ -52,7 +52,7 @@ public class ChangePetView {
     }
 
 
-    public String proceedPetAttributes(){
+    public String proceedPetAttributes() {
         System.out.println("Deseja continuar as alterações no pet?");
         System.out.println("1 - Sim");
         System.out.println("2 - Não");

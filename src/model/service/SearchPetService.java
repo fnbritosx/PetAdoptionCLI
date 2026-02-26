@@ -212,8 +212,8 @@ public class SearchPetService {
         }
     }
 
-    public void validateResponse(String numberCriteria, String responseUser){
-        switch (numberCriteria){
+    public void validateResponse(String numberCriteria, String responseUser) {
+        switch (numberCriteria) {
             case "2":
                 validateResponseSex(responseUser);
                 break;

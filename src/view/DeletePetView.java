@@ -5,17 +5,17 @@ import java.util.Scanner;
 public class DeletePetView {
     private final Scanner scanner;
 
-    public DeletePetView(){
+    public DeletePetView() {
         this.scanner = new Scanner(System.in);
     }
 
 
-    public void readerLine(String line){
+    public void readerLine(String line) {
         System.out.println(line);
     }
 
 
-    public String askDeleteLine(){
+    public String askDeleteLine() {
         System.out.println();
         System.out.println("Qual linha deseja deletar? ");
 
@@ -25,7 +25,7 @@ public class DeletePetView {
     }
 
 
-    public String confirmDeleteLine(String line){
+    public String confirmDeleteLine(String line) {
         System.out.println();
         System.out.println("Tem certeza de que quer deletar a linha: " + "\n");
 

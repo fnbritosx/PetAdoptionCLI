@@ -71,7 +71,7 @@ public class ChangePetController {
                     System.out.println();
                     break;
                 } catch (ChangePetException e) {
-                   formattedRed(e.getMessage());
+                    formattedRed(e.getMessage());
                 }
             }
 
@@ -101,7 +101,7 @@ public class ChangePetController {
                     }
                     break;
                 } catch (ResponseFormException e) {
-                   formattedRed(e.getMessage());
+                    formattedRed(e.getMessage());
                 }
             }
 
@@ -124,7 +124,7 @@ public class ChangePetController {
         }
     }
 
-    private void formattedRed(String e){
+    private void formattedRed(String e) {
         System.out.println("\u001B[1m\u001B[31m" + e + "\u001B[0m " + "\n");
     }
 }

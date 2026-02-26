@@ -42,7 +42,7 @@ public class SearchPetController {
                 searchService.validateCriteria(responseMenuCriteria);
                 break;
             } catch (SearchPetException e) {
-               formattedRed(e.getMessage());
+                formattedRed(e.getMessage());
             }
         }
 
@@ -79,7 +79,7 @@ public class SearchPetController {
                 responseProceedCriterion = searchService.validateProceed(response);
                 break;
             } catch (SearchPetException e) {
-               formattedRed(e.getMessage());
+                formattedRed(e.getMessage());
             }
         }
 
@@ -93,7 +93,7 @@ public class SearchPetController {
                     searchService.validateNewMenuCriteria(responseNewMenuCriteria, responseMenuCriteria);
                     break;
                 } catch (SearchPetException e) {
-                  formattedRed(e.getMessage());
+                    formattedRed(e.getMessage());
                 }
             }
         }
@@ -120,7 +120,7 @@ public class SearchPetController {
                     searchService.validateResponse(responseNewMenuCriteria, responseTwo);
                     break;
                 } catch (SearchPetException e) {
-                   formattedRed(e.getMessage());
+                    formattedRed(e.getMessage());
                 }
             }
         }
@@ -160,15 +160,15 @@ public class SearchPetController {
                 view.displayFilteredPets();
             }
         } catch (IOException e) {
-           formattedRed(e.getMessage());
+            formattedRed(e.getMessage());
         }
     }
 
-    private void formattedRed(String e){
+    private void formattedRed(String e) {
         System.out.println("\u001B[1m\u001B[31m" + e + "\u001B[0m " + "\n");
     }
 
-    private void formattedGreen(String e){
+    private void formattedGreen(String e) {
         System.out.println("\u001B[1m\u001B[32m" + e + "\u001B[0m " + "\n");
     }
 }

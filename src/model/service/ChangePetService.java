@@ -16,7 +16,7 @@ public class ChangePetService {
     public void validateWhichPet(String numberStartLine) throws IOException {
         for (String line : repository.getAllPetsLines()) {
             if (!line.startsWith(numberStartLine.trim() + "-")) {
-              return;
+                return;
             }
         }
 

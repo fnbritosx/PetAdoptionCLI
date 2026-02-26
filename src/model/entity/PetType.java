@@ -22,5 +22,4 @@ public enum PetType {
         }
         throw new IllegalArgumentException("Tipo inválido: " + value);
     }
-
 }

@@ -78,21 +78,21 @@ public class DeletePetController {
 
                     repository.updateFileAfterDelete(newList);
 
-                  formattedGreen("Pet deletado com sucesso!");
+                    formattedGreen("Pet deletado com sucesso!");
                     break;
                 }
-            }catch (Throwable e){
+            } catch (Throwable e) {
                 System.out.println();
                 System.out.println("\u001B[1m\u001B[31m" + e.getMessage() + "\u001B[0m " + "\n");
             }
         }
     }
 
-    private void formattedRed(String e){
+    private void formattedRed(String e) {
         System.out.println("\u001B[1m\u001B[31m" + e + "\u001B[0m " + "\n");
     }
 
-    private void formattedGreen(String e){
+    private void formattedGreen(String e) {
         System.out.println("\u001B[1m\u001B[32m" + e + "\u001B[0m " + "\n");
     }
 }

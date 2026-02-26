@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.function.BiConsumer;
 
 public class SearchPetView {
     private final Scanner scanner;
